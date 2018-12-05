@@ -12,12 +12,7 @@ An opinionated Django start project template that uses:
 ### Django 2.0
 Create project with Django 2.0
 ```
-django-admin startproject --template=https://github.com/Lrcezimbra/django-template/archive/django-2.0.zip --extension=env,txt myproject
-```
-### Django 1.11
-Create project with Django 1.11
-```
-django-admin startproject --template=https://github.com/Lrcezimbra/django-template/archive/django-1.11.zip --extension=env,txt myproject
+django-admin startproject --template=https://github.com/Lrcezimbra/django-template/archive/master.zip --extension=env,txt myproject
 ```
 
 ## Contribute
