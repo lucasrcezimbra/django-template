@@ -9,10 +9,13 @@ An opinionated Django start project template that uses:
 
 
 ## How to Use
-### Django 2.0
-Create project with Django 2.0
 ```
 django-admin startproject --template=https://github.com/Lrcezimbra/django-template/archive/master.zip --extension=env,txt myproject
+cd myproject
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py runserver
 ```
 
 ## Contribute
