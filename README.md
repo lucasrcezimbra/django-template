@@ -21,3 +21,8 @@ python manage.py runserver
 ## Contribute
 
 Contributions are welcome, feel free to suggest improvements.
+
+
+##
+
+[ ~ Dependencies scanned by PyUp.io ~ ]
