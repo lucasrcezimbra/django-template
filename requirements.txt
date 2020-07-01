@@ -1,5 +1,5 @@
 dj-database-url==0.5.0
-Django==3.0.7
+Django==3.0.8
 django-extensions==3.0.1
 pytest-django==3.9.0
 pytest-mock==3.1.1
