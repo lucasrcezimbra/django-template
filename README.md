@@ -15,7 +15,9 @@ PROJECT=myproject \
         && cd $PROJECT \
         && python -m venv .venv \
         && source .venv/bin/activate \
-        && pip install -r requirements.txt \
+        && pip install -r requirements-dev.txt \
+        && git init \
+        && pre-commit install \
         && python manage.py runserver
 ```
 
