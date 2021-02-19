@@ -11,7 +11,7 @@ An opinionated Django start project template that uses:
 ## How to Use
 ```
 PROJECT=myproject \
-        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --extension=env,txt $PROJECT \
+        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --extension=env,ini,txt $PROJECT \
         && cd $PROJECT \
         && python -m venv .venv \
         && source .venv/bin/activate \
