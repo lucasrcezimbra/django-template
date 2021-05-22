@@ -1,5 +1,5 @@
 -r requirements.txt
 
-pre-commit==2.12.1
+pre-commit==2.13.0
 pytest-django==4.3.0
 pytest-mock==3.6.1
