@@ -11,6 +11,7 @@ An opinionated Django start project template that uses:
 
 ## How to Use
 ```bash
+pip install django
 PROJECT=myproject \
         && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile --extension=env,ini,txt $PROJECT \
         && cd $PROJECT \
