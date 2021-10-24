@@ -15,7 +15,7 @@ An opinionated Django start project template that uses:
 ```bash
 pip install django
 PROJECT=myproject \
-        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile --extension=env,ini,txt,yml $PROJECT \
+        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile,env-sample --extension=env,ini,txt,yml $PROJECT \
         && cd $PROJECT \
         && python -m venv .venv \
         && source .venv/bin/activate \
