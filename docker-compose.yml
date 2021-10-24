@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    restart: always
+    volumes:
+      - ../data_{{ project_name }}:/var/lib/postgresql/data
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_USER={{ project_name }}
+      - POSTGRES_PASSWORD=p4ssw0rd
+    ports:
+      - 5432:5432

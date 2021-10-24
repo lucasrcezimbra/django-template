@@ -7,19 +7,23 @@ An opinionated Django start project template that uses:
 - [django-extensions](https://github.com/django-extensions/django-extensions) for custom extensions for Django
 - [pytest-django](https://github.com/pytest-dev/pytest-django), [pytest-mock](https://github.com/pytest-dev/pytest-mock) and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [Heroku](https://www.heroku.com/) to deploy
+- [PostgreSQL](https://www.postgresql.org/) database
+- [docker](https://www.docker.com/) with [compose](https://github.com/docker/compose)
 
 
 ## How to Use
 ```bash
 pip install django
 PROJECT=myproject \
-        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile --extension=env,ini,txt $PROJECT \
+        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile --extension=env,ini,txt,yml $PROJECT \
         && cd $PROJECT \
         && python -m venv .venv \
         && source .venv/bin/activate \
         && pip install -r requirements-dev.txt \
         && git init \
         && pre-commit install \
+        && docker-compose up -d \
+        && sleep 5 \
         && python manage.py makemigrations \
         && python manage.py migrate \
         && python manage.py runserver
