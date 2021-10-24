@@ -5,7 +5,7 @@ An opinionated Django start project template that uses:
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
 - [dj-database-url](https://github.com/kennethreitz/dj-database-url) to cast database URL to Django setting
 - [django-extensions](https://github.com/django-extensions/django-extensions) for custom extensions for Django
-- [pytest-django](https://github.com/pytest-dev/pytest-django) and [pytest-mock](https://github.com/pytest-dev/pytest-mock) for tests
+- [pytest-django](https://github.com/pytest-dev/pytest-django), [pytest-mock](https://github.com/pytest-dev/pytest-mock) and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [Heroku](https://www.heroku.com/) to deploy
 
 
