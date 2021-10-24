@@ -20,8 +20,8 @@ PROJECT=myproject \
         && pip install -r requirements-dev.txt \
         && git init \
         && pre-commit install \
-        && python manage.py makemigrations
-        && python manage.py migrate
+        && python manage.py makemigrations \
+        && python manage.py migrate \
         && python manage.py runserver
 ```
 
