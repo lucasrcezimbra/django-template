@@ -3,7 +3,6 @@ version: "3.9"
 services:
   database:
     image: postgres
-    restart: always
     volumes:
       - ../data_{{ project_name }}:/var/lib/postgresql/data
     environment:
