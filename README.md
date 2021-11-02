@@ -13,20 +13,9 @@ An opinionated Django start project template that uses:
 
 ## How to Use
 ```bash
-pip install django
-PROJECT=myproject \
-        && django-admin startproject --template=https://github.com/lucasrcezimbra/django-template/archive/master.zip --name=Procfile,env-sample --extension=env,ini,txt,yml $PROJECT \
-        && cd $PROJECT \
-        && python -m venv .venv \
-        && source .venv/bin/activate \
-        && pip install -r requirements-dev.txt \
-        && git init \
-        && pre-commit install \
-        && docker-compose up -d \
-        && sleep 5 \
-        && python manage.py makemigrations \
-        && python manage.py migrate \
-        && python manage.py runserver
+export PROJECT=my_project_name \
+    && curl -o- https://raw.githubusercontent.com/lucasrcezimbra/django-template/master/install.sh | bash \
+    && cd $PROJECT
 ```
 
 ## Deploy
