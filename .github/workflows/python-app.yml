@@ -27,4 +27,5 @@ jobs:
     - name: pytest
       run: |
         docker-compose up -d
+        sleep 5
         pytest
