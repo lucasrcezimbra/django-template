@@ -1,4 +1,4 @@
-boto3==1.20.48
+boto3==1.21.7
 dj-database-url==0.5.0
 Django==4.0.2
 django-extensions==3.1.5
