@@ -18,16 +18,6 @@ export PROJECT=my_project_name \
     && cd $PROJECT
 ```
 
-## Deploy
-```bash
-PROJECT=myproject \
-        && git add . \
-        && git commit -m 'First blood' \
-        && heroku create $PROJECT \
-        && heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS='.herokuapp.com'\
-        && git push heroku master
-```
-
 ## Contribute
 
 Contributions are welcome, feel free to suggest improvements.
