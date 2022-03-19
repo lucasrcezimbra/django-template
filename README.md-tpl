@@ -23,3 +23,12 @@ pytest
 python manage.py migrate
 python manage.py runserver
 ```
+
+
+## Deploy
+```bash
+heroku create {{ project_name }}
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS="*"
+git push heroku master
+```
