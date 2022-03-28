@@ -3,8 +3,6 @@ version: "3.9"
 services:
   database:
     image: postgres
-    volumes:
-      - ../data_{{ project_name }}:/var/lib/postgresql/data
     environment:
       - LC_ALL=C.UTF-8
       - POSTGRES_USER={{ project_name }}
