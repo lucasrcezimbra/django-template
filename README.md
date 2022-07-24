@@ -1,5 +1,4 @@
 # Django Template
-[![Updates](https://pyup.io/repos/github/lucasrcezimbra/django-template/shield.svg)](https://pyup.io/repos/github/lucasrcezimbra/django-template/)
 
 An opinionated Django start project template that uses:
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
@@ -21,8 +20,3 @@ export PROJECT=my_project_name \
 ## Contribute
 
 Contributions are welcome, feel free to suggest improvements.
-
-
-##
-
-[ ~ Dependencies scanned by PyUp.io ~ ]
