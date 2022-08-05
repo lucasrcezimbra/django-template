@@ -2,7 +2,7 @@ boto3==1.24.45
 dj-database-url==1.0.0
 Django==4.1
 django-extensions==3.2.0
-django-storages==1.12.3
+django-storages==1.13
 gunicorn==20.1.0
 psycopg2-binary==2.9.3
 python-decouple==3.6
