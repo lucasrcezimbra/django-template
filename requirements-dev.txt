@@ -3,4 +3,4 @@
 model-bakery==1.7.0
 pre-commit==2.20.0
 pytest-django==4.5.2
-pytest-mock==3.8.2
+pytest-mock==3.10.0
