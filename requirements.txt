@@ -1,5 +1,5 @@
 boto3==1.26.84
-dj-database-url==1.0.0
+dj-database-url==2.0.0
 Django==4.1.9
 django-extensions==3.2.3
 django-storages==1.13.2
