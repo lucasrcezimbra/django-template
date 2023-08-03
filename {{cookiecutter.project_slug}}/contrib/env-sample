@@ -1,5 +1,5 @@
 ALLOWED_HOSTS=127.0.0.1, .localhost
-DATABASE_URL=postgres://{{ project_name }}:p4ssw0rd@localhost:5432/{{ project_name }}
+DATABASE_URL=postgres://{{ cookiecutter.project_slug }}:p4ssw0rd@localhost:5432/{{ cookiecutter.project_name }}
 DEBUG=True
 SECRET_KEY=THIS_IS_NOT_A_GOOD_SECRET
 
