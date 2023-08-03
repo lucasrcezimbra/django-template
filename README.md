@@ -20,3 +20,8 @@ export PROJECT=my_project_name \
 ## Contribute
 
 Contributions are welcome, feel free to suggest improvements.
+
+
+## TODOs
+- [ ] If not Heroku remove Procfile
+- [ ] Update this README
