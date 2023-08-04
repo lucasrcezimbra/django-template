@@ -39,15 +39,20 @@ api
 │   ├── asgi.py
 │   ├── core
 │   │   ├── admin.py
+│   │   ├── api.py
 │   │   ├── apps.py
+│   │   ├── facades
+│   │   │   └── __init__.py
 │   │   ├── __init__.py
 │   │   ├── managers.py
 │   │   ├── migrations
+│   │   │   ├── 0001_initial.py
 │   │   │   └── __init__.py
 │   │   ├── models.py
 │   │   ├── templates
 │   │   │   └── index.html
 │   │   ├── tests
+│   │   │   ├── test_api.py
 │   │   │   ├── tests.py
 │   │   │   └── test_view_index.py
 │   │   └── views.py
@@ -61,10 +66,9 @@ api
 ├── docker-compose.yml
 ├── manage.py
 ├── Procfile
-├── pytest.ini
-├── README.md
-├── requirements-dev.txt
-└── requirements.txt
+├── pyproject.toml
+└── README.md
+
 ```
 
 
