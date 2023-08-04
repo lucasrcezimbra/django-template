@@ -15,14 +15,22 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 - [django-extensions](https://github.com/django-extensions/django-extensions) for custom extensions for Django
 - [docker](https://www.docker.com/) with [compose](https://github.com/docker/compose)
 - [PostgreSQL](https://www.postgresql.org/) database
-- [pytest-django](https://github.com/pytest-dev/pytest-django), [pytest-mock](https://github.com/pytest-dev/pytest-mock) and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
+- [pre-commit](https://github.com/pre-commit/pre-commit) with
+[bandit](https://github.com/PyCQA/bandit),
+[black](https://github.com/psf/black),
+[flake8](https://github.com/pycqa/flake8),
+[isort](https://github.com/timothycrosley/isort),
+and [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
+- [pytest-django](https://github.com/pytest-dev/pytest-django),
+[pytest-mock](https://github.com/pytest-dev/pytest-mock),
+and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
 
 Optionals:
 - [Heroku](https://www.heroku.com/) to deploy
 
 
-## Tree
+### Tree
 ```
 api
 ├── api
