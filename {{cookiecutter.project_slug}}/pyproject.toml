@@ -22,3 +22,8 @@ pre-commit = "^3.3.3"
 pytest = "^7.4.0"
 pytest-django = "^4.5.2"
 pytest-mock = "^3.11.1"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "{{ cookiecutter.project_slug }}.settings"
+python_files = "tests.py test_*.py *_tests.py"
