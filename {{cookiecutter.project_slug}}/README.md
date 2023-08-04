@@ -21,7 +21,7 @@ poetry run pytest
 ```bash
 poetry run manage.py runserver
 ```
-{% if cookiecutter.use_heroku == 'True' %}
+{%- if cookiecutter.deploy == "Heroku" %}
 
 ## Deploy
 ```bash
@@ -30,4 +30,4 @@ heroku addons:create heroku-postgresql:hobby-dev
 heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS="*"
 git push heroku master
 ```
-{% endif %}
+{%- endif %}
