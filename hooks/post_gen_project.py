@@ -5,8 +5,7 @@ PROJECT_DIRECTORY = Path().absolute()
 
 
 def remove(path):
-    abs_path = PROJECT_DIRECTORY / path
-    abs_path.unlink()
+    (PROJECT_DIRECTORY / path).unlink()
 
 
 if __name__ == "__main__":
