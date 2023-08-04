@@ -14,6 +14,7 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 - [dj-database-url](https://github.com/kennethreitz/dj-database-url) to cast database URL to Django setting
 - [django-extensions](https://github.com/django-extensions/django-extensions) for custom extensions for Django
 - [docker](https://www.docker.com/) with [compose](https://github.com/docker/compose)
+- [Gunicorn](https://gunicorn.org/) as WSGI HTTP Server
 - [PostgreSQL](https://www.postgresql.org/) database
 - [pre-commit](https://github.com/pre-commit/pre-commit) with
 [bandit](https://github.com/PyCQA/bandit),
