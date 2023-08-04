@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.0.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+boto3 = "^1.28.19"
+dj-database-url = "^2.0.0"
+django = "^4.2.4"
+django-extensions = "^3.2.3"
+django-storages = "^1.13.2"
+gunicorn = "^21.2.0"
+psycopg2-binary = "^2.9.6"
+python-decouple = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+model-bakery = "^1.12.0"
+pre-commit = "^3.3.3"
+pytest = "^7.4.0"
+pytest-django = "^4.5.2"
+pytest-mock = "^3.11.1"
