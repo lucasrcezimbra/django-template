@@ -9,6 +9,7 @@ docker-compose up -d
 poetry install
 poetry run pre-commit install
 cp contrib/env-sample .env
+poetry run python manage.py migrate
 ```
 
 ### Test
@@ -18,11 +19,9 @@ poetry run pytest
 
 ### Run
 ```bash
-poetry run python manage.py migrate
 poetry run manage.py runserver
 ```
-{% if cookiecutter.use_heroku %}
-
+{% if cookiecutter.use_heroku == 'True' %}
 
 ## Deploy
 ```bash
