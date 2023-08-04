@@ -14,7 +14,7 @@ psycopg2-binary = "^2.9.6"
 python-decouple = "^3.8"
 {%- if cookiecutter.use_django_ninja == 'True' %}
 django-ninja = "^0.22.2"
-{% endif %}
+{%- endif %}
 
 
 [tool.poetry.group.dev.dependencies]
@@ -28,3 +28,7 @@ pytest-mock = "^3.11.1"
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "{{ cookiecutter.project_slug }}.settings"
 python_files = "tests.py test_*.py *_tests.py"
+
+
+[tool.isort]
+profile = "black"
