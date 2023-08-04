@@ -1,28 +1,27 @@
-# {{ cookiecutter.project_slug }}
+# {{ cookiecutter.project_name }}
 
 
 ## Installation
 ```bash
-git clone git@github.com:lucasrcezimbra/{{ cookiecutter.project_slug }}.git
+git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
 cd {{ cookiecutter.project_slug }}
 docker-compose up -d
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-dev.txt
-pre-commit install
+poetry install
+poetry run pre-commit install
 cp contrib/env-sample .env
 ```
 
 ### Test
 ```bash
-pytest
+poetry run pytest
 ```
 
 ### Run
 ```bash
-python manage.py migrate
-python manage.py runserver
+poetry run python manage.py migrate
+poetry run manage.py runserver
 ```
+{% if cookiecutter.use_heroku %}
 
 
 ## Deploy
@@ -32,3 +31,4 @@ heroku addons:create heroku-postgresql:hobby-dev
 heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS="*"
 git push heroku master
 ```
+{% endif %}
