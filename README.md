@@ -28,6 +28,7 @@ and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
 
 Optionals:
+- [Django Ninja](https://github.com/vitalik/django-ninja) to build APIs
 - [Heroku](https://www.heroku.com/) to deploy
 
 
