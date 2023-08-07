@@ -54,6 +54,7 @@ api
 │   │   │   └── index.html
 │   │   ├── tests
 │   │   │   ├── test_api.py
+│   │   │   ├── test_crud.py
 │   │   │   ├── tests.py
 │   │   │   └── test_view_index.py
 │   │   └── views.py
@@ -65,11 +66,11 @@ api
 │   ├── env-sample
 │   └── secret_gen.py
 ├── docker-compose.yml
+├── Dockerfile
 ├── manage.py
 ├── Procfile
 ├── pyproject.toml
 └── README.md
-
 ```
 
 
