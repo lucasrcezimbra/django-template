@@ -29,7 +29,7 @@ and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 
 Optionals:
 - [Dockerfile](https://www.docker.com/)
-- [Django Ninja](https://github.com/vitalik/django-ninja) to build APIs
+- [Django Ninja](https://github.com/vitalik/django-ninja) and [Django Ninja CRUD](https://github.com/hbakri/django-ninja-crud) to build APIs
 - [Heroku](https://www.heroku.com/) to deploy
 
 

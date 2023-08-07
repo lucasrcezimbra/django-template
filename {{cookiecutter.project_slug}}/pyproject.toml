@@ -12,6 +12,9 @@ django-extensions = "^3.2.3"
 {%- if cookiecutter.api != 'No' %}
 django-ninja = "^0.22.2"
 {%- endif %}
+{%- if cookiecutter.api == 'Django Ninja CRUD' %}
+django-ninja-crud = "^0.2.0"
+{%- endif %}
 gunicorn = "^21.2.0"
 psycopg2-binary = "^2.9.6"
 python-decouple = "^3.8"

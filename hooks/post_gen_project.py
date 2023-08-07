@@ -16,3 +16,5 @@ if __name__ == "__main__":
         remove("{{cookiecutter.project_slug}}/core/tests/test_api.py")
     if "{{cookiecutter.deploy}}" != "Docker":
         remove("Dockerfile")
+    if "{{cookiecutter.api}}" != "Django Ninja CRUD":
+        remove("{{cookiecutter.project_slug}}/core/tests/test_crud.py")
