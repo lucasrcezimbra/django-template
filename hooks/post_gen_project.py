@@ -11,7 +11,7 @@ def remove(path):
 if __name__ == "__main__":
     if "{{cookiecutter.deploy}}" != "Heroku":
         remove("Procfile")
-    if not {{cookiecutter.use_django_ninja}}:
+    if "{{cookiecutter.api}}" == "No":
         remove("{{cookiecutter.project_slug}}/core/api.py")
         remove("{{cookiecutter.project_slug}}/core/tests/test_api.py")
     if "{{cookiecutter.deploy}}" != "Docker":
