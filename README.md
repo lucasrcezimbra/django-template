@@ -29,9 +29,8 @@ and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
 
 Optionals:
-- [Dockerfile](https://www.docker.com/)
+- [Dockerfile](https://www.docker.com/) or [Heroku](https://www.heroku.com/) to deploy
 - [Django Ninja](https://github.com/vitalik/django-ninja) and [Django Ninja CRUD](https://github.com/hbakri/django-ninja-crud) to build APIs
-- [Heroku](https://www.heroku.com/) to deploy
 - [Sentry](https://sentry.io/) for error tracking
 
 

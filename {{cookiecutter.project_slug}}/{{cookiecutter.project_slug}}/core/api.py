@@ -12,8 +12,6 @@ from ninja_crud.views import (
 )
 {%- endif %}
 
-
-
 api = NinjaAPI()
 
 
@@ -49,4 +47,4 @@ class UserViewSet(ModelViewSet):
 router = Router()
 UserViewSet.register_routes(router)
 api.add_router(f"/users", router)
-{%- endif %}
+{% endif %}
