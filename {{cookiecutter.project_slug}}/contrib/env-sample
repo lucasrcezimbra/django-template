@@ -1,4 +1,9 @@
 ALLOWED_HOSTS=127.0.0.1, .localhost
 DATABASE_URL=postgres://{{ cookiecutter.project_slug }}:p4ssw0rd@localhost:5432/{{ cookiecutter.project_slug }}
 DEBUG=True
+ENV=local
 SECRET_KEY=THIS_IS_NOT_A_GOOD_SECRET
+
+{%- if cookiecutter.use_sentry == 'True' %}
+SENTRY_DSN=
+{%- endif %}
