@@ -36,5 +36,11 @@ DJANGO_SETTINGS_MODULE = "{{ cookiecutter.project_slug }}.settings"
 python_files = "tests.py test_*.py *_tests.py"
 
 
-[tool.isort]
-profile = "black"
+[tool.ruff]
+select = ["E", "F", "I", "S", "TRY"]
+ignore = ["E501"]
+line-length = 88
+
+[tool.ruff.per-file-ignores]
+"manage.py" = ["TRY003"]
+"**/tests/**" = ["S101"]
