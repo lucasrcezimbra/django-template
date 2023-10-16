@@ -32,6 +32,7 @@ Optionals:
 - [Dockerfile](https://www.docker.com/) or [Heroku](https://www.heroku.com/) to deploy
 - [Django Ninja](https://github.com/vitalik/django-ninja) and [Django Ninja CRUD](https://github.com/hbakri/django-ninja-crud) to build APIs
 - [Sentry](https://sentry.io/) for error tracking
+- [WhiteNoise](https://github.com/evansd/whitenoise) to serve static files
 
 
 ### Tree
