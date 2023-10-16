@@ -19,9 +19,9 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
-        pre-commit install
+        poetry run pre-commit install
         cp contrib/env-sample .env
-    - run: pre-commit run -a
+    - run: poetry run pre-commit run -a
     - name: pytest
       run: |
         docker-compose up -d
