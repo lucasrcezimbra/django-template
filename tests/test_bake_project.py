@@ -135,3 +135,10 @@ def test_deploy_heroku(cookies):
             )
             in f.read()
         )
+
+
+def test_github_username(cookies):
+    result = cookies.bake(extra_context={"github_username": "my_custom_username"})
+
+    with open(result.project / "README.md") as f:
+        assert "git clone git@github.com:my_custom_username/api.git" in f.read()
