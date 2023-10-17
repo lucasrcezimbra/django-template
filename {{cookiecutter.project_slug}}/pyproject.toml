@@ -18,7 +18,7 @@ django-ninja-crud = "^0.2.0"
 gunicorn = "^21.2.0"
 psycopg2-binary = "^2.9.6"
 python-decouple = "^3.8"
-{%- if cookiecutter.use_sentry == 'True' %}
+{%- if cookiecutter.use_sentry %}
 sentry-sdk = {extras = ["django"], version = "^1.29.2"}
 {%- endif %}
 {% if cookiecutter.staticfiles == 'True' %}

@@ -4,6 +4,6 @@ DEBUG=True
 ENV=local
 SECRET_KEY=THIS_IS_NOT_A_GOOD_SECRET
 
-{%- if cookiecutter.use_sentry == 'True' %}
+{%- if cookiecutter.use_sentry %}
 SENTRY_DSN=
 {%- endif %}
