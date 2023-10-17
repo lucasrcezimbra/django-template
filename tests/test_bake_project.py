@@ -1,7 +1,6 @@
 from textwrap import dedent
 
-
-DEFAULT_PROJECT = 'api'
+DEFAULT_PROJECT = "api"
 
 
 def test_bake_with_defaults(cookies):
@@ -35,7 +34,7 @@ def test_sentry_default_true(cookies):
 
 
 def test_sentry_false(cookies):
-    result = cookies.bake(extra_context={'use_sentry': False})
+    result = cookies.bake(extra_context={"use_sentry": False})
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
@@ -59,21 +58,26 @@ def test_staticfiles_default_true(cookies):
         content = f.read()
         assert "django.contrib.staticfiles" in content
         assert "whitenoise.middleware.WhiteNoiseMiddleware" in content
-        assert dedent("""\
-            STATIC_ROOT = BASE_DIR / "staticfiles"
-            STATIC_URL = "/static/"
-            STORAGES = {
-                "staticfiles": {
-                    "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-                },
-            }""") in content
+        assert (
+            dedent(
+                """\
+                STATIC_ROOT = BASE_DIR / "staticfiles"
+                STATIC_URL = "/static/"
+                STORAGES = {
+                    "staticfiles": {
+                        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+                    },
+                }"""
+            )
+            in content
+        )
 
     with open(result.project / "pyproject.toml") as f:
         assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
 
 
 def test_staticfiles_false(cookies):
-    result = cookies.bake(extra_context={'staticfiles': False})
+    result = cookies.bake(extra_context={"staticfiles": False})
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
@@ -84,4 +88,4 @@ def test_staticfiles_false(cookies):
         assert "STORAGES" not in content
 
     with open(result.project / "pyproject.toml") as f:
-        assert 'whitenoise' not in f.read()
+        assert "whitenoise" not in f.read()
