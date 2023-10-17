@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    {% if cookiecutter.staticfiles == 'True' %}
+    {% if cookiecutter.staticfiles %}
     "django.contrib.staticfiles",
     {%- endif %}
     "django_extensions",
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    {% if cookiecutter.staticfiles == 'True' %}
+    {% if cookiecutter.staticfiles %}
     "whitenoise.middleware.WhiteNoiseMiddleware",
     {%- endif %}
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -107,10 +107,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "core.User"
 
 
-{% if cookiecutter.staticfiles == 'True' %}
+{% if cookiecutter.staticfiles %}
 # Static
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",

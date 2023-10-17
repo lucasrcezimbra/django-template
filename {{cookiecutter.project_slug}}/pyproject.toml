@@ -21,7 +21,7 @@ python-decouple = "^3.8"
 {%- if cookiecutter.use_sentry %}
 sentry-sdk = {extras = ["django"], version = "^1.29.2"}
 {%- endif %}
-{% if cookiecutter.staticfiles == 'True' %}
+{% if cookiecutter.staticfiles %}
 whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 {%- endif %}
 
