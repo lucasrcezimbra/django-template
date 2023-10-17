@@ -89,3 +89,49 @@ def test_staticfiles_false(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         assert "whitenoise" not in f.read()
+
+
+def test_no_deploy(cookies):
+    result = cookies.bake()
+    found_toplevel_files = {f.basename for f in result.project.listdir()}
+
+    assert "Procfile" not in found_toplevel_files
+    assert "Dockerfile" not in found_toplevel_files
+    with open(result.project / "README.md") as f:
+        content = f.read()
+        assert "## Deploy" not in content
+        assert "heroku" not in content
+
+
+def test_deploy_docker(cookies):
+    result = cookies.bake(extra_context={"deploy": "Docker"})
+    found_toplevel_files = {f.basename for f in result.project.listdir()}
+
+    assert "Procfile" not in found_toplevel_files
+    assert "Dockerfile" in found_toplevel_files
+    with open(result.project / "README.md") as f:
+        content = f.read()
+        assert "## Deploy" not in content
+        assert "heroku" not in content
+
+
+def test_deploy_heroku(cookies):
+    result = cookies.bake(extra_context={"deploy": "Heroku"})
+    found_toplevel_files = {f.basename for f in result.project.listdir()}
+
+    assert "Procfile" in found_toplevel_files
+    assert "Dockerfile" not in found_toplevel_files
+    with open(result.project / "README.md") as f:
+        assert (
+            dedent(
+                """\
+                ## Deploy
+                ```bash
+                heroku create api
+                heroku addons:create heroku-postgresql:hobby-dev
+                heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS="*"
+                git push heroku master
+                ```"""
+            )
+            in f.read()
+        )
