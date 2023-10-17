@@ -1,0 +1,25 @@
+databases:
+  - name: {{cookiecutter.project_slug}}
+    databaseName: {{cookiecutter.project_slug}}
+    user: {{cookiecutter.project_slug}}
+    plan: free
+
+services:
+  - type: web
+    name: {{cookiecutter.project_slug}}
+    plan: free
+    runtime: python
+    startCommand: "poetry run python manage.py collectstatic && poetry run python manage.py migrate && poetry run gunicorn {{cookiecutter.project_slug}}.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: {{cookiecutter.project_slug}}
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: ALLOWED_HOSTS
+        value: {{cookiecutter.project_slug}}.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.11.6

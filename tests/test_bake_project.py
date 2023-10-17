@@ -97,6 +97,7 @@ def test_no_deploy(cookies):
 
     assert "Procfile" not in found_toplevel_files
     assert "Dockerfile" not in found_toplevel_files
+    assert "render.yaml" not in found_toplevel_files
     with open(result.project / "README.md") as f:
         content = f.read()
         assert "## Deploy" not in content
@@ -108,6 +109,7 @@ def test_deploy_docker(cookies):
     found_toplevel_files = {f.basename for f in result.project.listdir()}
 
     assert "Procfile" not in found_toplevel_files
+    assert "render.yaml" not in found_toplevel_files
     assert "Dockerfile" in found_toplevel_files
     with open(result.project / "README.md") as f:
         content = f.read()
@@ -119,8 +121,9 @@ def test_deploy_heroku(cookies):
     result = cookies.bake(extra_context={"deploy": "Heroku"})
     found_toplevel_files = {f.basename for f in result.project.listdir()}
 
-    assert "Procfile" in found_toplevel_files
     assert "Dockerfile" not in found_toplevel_files
+    assert "render.yaml" not in found_toplevel_files
+    assert "Procfile" in found_toplevel_files
     with open(result.project / "README.md") as f:
         assert (
             dedent(
@@ -134,6 +137,45 @@ def test_deploy_heroku(cookies):
                 ```"""
             )
             in f.read()
+        )
+
+
+def test_deploy_render(cookies):
+    result = cookies.bake(extra_context={"deploy": "Render"})
+    found_toplevel_files = {f.basename for f in result.project.listdir()}
+
+    assert "Procfile" not in found_toplevel_files
+    assert "Dockerfile" not in found_toplevel_files
+    assert "render.yaml" in found_toplevel_files
+    with open(result.project / "render.yaml") as f:
+        assert f.read() == dedent(
+            """\
+            databases:
+              - name: api
+                databaseName: api
+                user: api
+                plan: free
+
+            services:
+              - type: web
+                name: api
+                plan: free
+                runtime: python
+                startCommand: "poetry run python manage.py collectstatic && poetry run python manage.py migrate && poetry run gunicorn api.wsgi:application"
+                envVars:
+                  - key: DATABASE_URL
+                    fromDatabase:
+                      name: api
+                      property: connectionString
+                  - key: SECRET_KEY
+                    generateValue: true
+                  - key: WEB_CONCURRENCY
+                    value: 4
+                  - key: ALLOWED_HOSTS
+                    value: api.onrender.com
+                  - key: PYTHON_VERSION
+                    value: 3.11.6
+                    """
         )
 
 
