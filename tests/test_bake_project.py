@@ -1,6 +1,9 @@
 from textwrap import dedent
 
 
+DEFAULT_PROJECT = 'api'
+
+
 def test_bake_with_defaults(cookies):
     result = cookies.bake()
 
@@ -16,7 +19,7 @@ def test_bake_with_defaults(cookies):
 def test_sentry_default_true(cookies):
     result = cookies.bake()
 
-    with open(result.project / "api" / "settings.py") as f:
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "import sentry_sdk" in content
         assert 'SENTRY_DSN = config("SENTRY_DSN", default=None)' in content
@@ -34,7 +37,7 @@ def test_sentry_default_true(cookies):
 def test_sentry_false(cookies):
     result = cookies.bake(extra_context={'use_sentry': False})
 
-    with open(result.project / "api" / "settings.py") as f:
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "import sentry_sdk" not in content
         assert 'SENTRY_DSN = config("SENTRY_DSN", default=None)' not in content
@@ -52,7 +55,7 @@ def test_sentry_false(cookies):
 def test_staticfiles_default_true(cookies):
     result = cookies.bake()
 
-    with open(result.project / "api" / "settings.py") as f:
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "django.contrib.staticfiles" in content
         assert "whitenoise.middleware.WhiteNoiseMiddleware" in content
@@ -72,7 +75,7 @@ def test_staticfiles_default_true(cookies):
 def test_staticfiles_false(cookies):
     result = cookies.bake(extra_context={'staticfiles': False})
 
-    with open(result.project / "api" / "settings.py") as f:
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "staticfiles" not in content
         assert "whitenoise" not in content
