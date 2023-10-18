@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     {%- endif %}
     "django_extensions",
+    {% if cookiecutter.html == "HTMX" %}
+    "django_htmx",
+    {%- endif %}
 ]
 
 MIDDLEWARE = [
@@ -46,6 +49,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    {% if cookiecutter.html == "HTMX" %}
+    "django_htmx.middleware.HtmxMiddleware",
+    {%- endif %}
 ]
 
 ROOT_URLCONF = "{{ cookiecutter.project_slug }}.urls"
@@ -109,6 +115,9 @@ AUTH_USER_MODEL = "core.User"
 
 {% if cookiecutter.staticfiles %}
 # Static
+STATICFILES_DIRS = [
+    BASE_DIR / "{{cookiecutter.project_slug}}" / "static",
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
 STORAGES = {

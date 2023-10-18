@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-  <h1>Hello World</h1>
-</body>
-</html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>{{cookiecutter.project_name}}</title>
+   {{"{% load static %}"}}
+   {% if cookiecutter.html == 'HTMX' %}
+   <script src={{"\"{% static 'htmx.min.js.gz' %}\""}} defer></script>
+   {% endif %}
+ </head>
+ <body>
+   <h1>Hello World</h1>
+   <div hx-get="/" hx-swap="outerHTML">Get Some HTML</div>
+ </body>
+ </html>

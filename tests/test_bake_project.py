@@ -54,6 +54,7 @@ def test_sentry_false(cookies):
 def test_staticfiles_default_true(cookies):
     result = cookies.bake()
 
+    assert (result.project / DEFAULT_PROJECT / "static").exists()
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "django.contrib.staticfiles" in content
@@ -61,6 +62,9 @@ def test_staticfiles_default_true(cookies):
         assert (
             dedent(
                 """\
+                STATICFILES_DIRS = [
+                    BASE_DIR / "api" / "static",
+                ]
                 STATIC_ROOT = BASE_DIR / "staticfiles"
                 STATIC_URL = "/static/"
                 STORAGES = {
@@ -78,6 +82,8 @@ def test_staticfiles_default_true(cookies):
 
 def test_staticfiles_false(cookies):
     result = cookies.bake(extra_context={"staticfiles": False})
+
+    assert not (result.project / DEFAULT_PROJECT / "static").exists()
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
@@ -185,3 +191,56 @@ def test_github_username(cookies):
 
     with open(result.project / "README.md") as f:
         assert "git clone git@github.com:my_custom_username/api.git" in f.read()
+
+
+def test_html_default(cookies):
+    result = cookies.bake()
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert (core_app_path / "templates" / "index.html").exists()
+    assert (core_app_path / "views.py").exists()
+    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(core_app_path / "templates" / "index.html") as f:
+        assert "{% static 'htmx.min.js.gz' %}" not in f.read()
+
+
+def test_html_no(cookies):
+    result = cookies.bake(extra_context={"html": "No"})
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert not (core_app_path / "templates").exists()
+    assert not (core_app_path / "views.py").exists()
+    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        assert "django_htmx" not in f.read()
+
+
+def test_html_htmx(cookies):
+    result = cookies.bake(extra_context={"html": "HTMX"})
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert (core_app_path / "templates" / "index.html").exists()
+    assert (core_app_path / "views.py").exists()
+    assert (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django-htmx =" in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "django_htmx" in content
+        assert "django_htmx.middleware.HtmxMiddleware" in content
+
+    with open(core_app_path / "templates" / "index.html") as f:
+        assert "{% static 'htmx.min.js.gz' %}" in f.read()
