@@ -9,7 +9,8 @@ services:
     name: {{cookiecutter.project_slug}}
     plan: free
     runtime: python
-    startCommand: "poetry run python manage.py collectstatic && poetry run python manage.py migrate && poetry run gunicorn {{cookiecutter.project_slug}}.wsgi:application"
+    buildCommand: "poetry install && poetry run python manage.py collectstatic && poetry run python manage.py migrate"
+    startCommand: "poetry run gunicorn {{cookiecutter.project_slug}}.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
