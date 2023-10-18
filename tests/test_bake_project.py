@@ -161,7 +161,8 @@ def test_deploy_render(cookies):
                 name: api
                 plan: free
                 runtime: python
-                startCommand: "poetry run python manage.py collectstatic && poetry run python manage.py migrate && poetry run gunicorn api.wsgi:application"
+                buildCommand: "poetry install && poetry run python manage.py collectstatic && poetry run python manage.py migrate"
+                startCommand: "poetry run gunicorn api.wsgi:application"
                 envVars:
                   - key: DATABASE_URL
                     fromDatabase:
