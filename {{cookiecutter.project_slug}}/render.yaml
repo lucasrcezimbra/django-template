@@ -24,3 +24,5 @@ services:
         value: {{cookiecutter.project_slug}}.onrender.com
       - key: PYTHON_VERSION
         value: 3.11.6
+      - key: POETRY_VERSION
+        value: 1.6.1
