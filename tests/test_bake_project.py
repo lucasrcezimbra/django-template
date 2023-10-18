@@ -182,6 +182,8 @@ def test_deploy_render(cookies):
                     value: api.onrender.com
                   - key: PYTHON_VERSION
                     value: 3.11.6
+                  - key: POETRY_VERSION
+                    value: 1.6.1
                     """
         )
 
