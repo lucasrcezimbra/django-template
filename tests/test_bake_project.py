@@ -227,6 +227,9 @@ def test_html_no(cookies):
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         assert "django_htmx" not in f.read()
 
+    with open(result.project / DEFAULT_PROJECT / "urls.py") as f:
+        assert "index" not in f.read()
+
 
 def test_html_htmx(cookies):
     result = cookies.bake(extra_context={"html": "HTMX"})
