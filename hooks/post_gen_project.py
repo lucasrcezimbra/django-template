@@ -30,3 +30,6 @@ if __name__ == "__main__":
 
     if "{{cookiecutter.staticfiles}}" != "True":
         shutil.rmtree("{{cookiecutter.project_slug}}/static/")
+
+    if "{{cookiecutter.database}}" != "PostgreSQL":
+        remove("docker-compose.yml")
