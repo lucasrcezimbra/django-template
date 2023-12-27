@@ -19,7 +19,9 @@ django-ninja = "^1.1.0"
 django-ninja-crud = "^0.2.0"
 {%- endif %}
 gunicorn = "^21.2.0"
+{%- if cookiecutter.database == 'PostgreSQL' %}
 psycopg2-binary = "^2.9.9"
+{%- endif %}
 python-decouple = "^3.8"
 {%- if cookiecutter.use_sentry %}
 sentry-sdk = {extras = ["django"], version = "^1.39.1"}
