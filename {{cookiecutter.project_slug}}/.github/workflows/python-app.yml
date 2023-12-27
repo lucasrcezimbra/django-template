@@ -22,8 +22,12 @@ jobs:
         poetry run pre-commit install
         cp contrib/env-sample .env
     - run: poetry run pre-commit run -a
+    {%- if cookiecutter.database == 'PostgreSQL' %}
     - name: pytest
       run: |
         docker-compose up -d
         sleep 5
         poetry run pytest
+    {%- elif cookiecutter.database == 'SQLite' %}
+    - run: poetry run pytest
+    {%- endif %}
