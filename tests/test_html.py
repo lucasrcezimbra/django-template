@@ -25,6 +25,7 @@ def test_no(cookies):
     core_app_path = result.project / DEFAULT_PROJECT / "core"
     assert not (core_app_path / "templates").exists()
     assert not (core_app_path / "views.py").exists()
+    assert not (core_app_path / "tests" / "test_view_index.py").exists()
     assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
