@@ -5,7 +5,9 @@
 ```bash
 git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
 cd {{ cookiecutter.project_slug }}
-docker-compose up -d
+{%- if cookiecutter.database == "PostgreSQL" %}
+docker compose up -d
+{%- endif %}
 poetry install
 poetry run pre-commit install
 cp contrib/env-sample .env
