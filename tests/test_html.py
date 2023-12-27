@@ -1,0 +1,57 @@
+DEFAULT_PROJECT = "api"
+
+
+def test_default(cookies):
+    result = cookies.bake()
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert (core_app_path / "templates" / "index.html").exists()
+    assert (core_app_path / "views.py").exists()
+    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(core_app_path / "templates" / "index.html") as f:
+        assert "{% static 'htmx.min.js.gz' %}" not in f.read()
+
+
+def test_no(cookies):
+    result = cookies.bake(extra_context={"html": "No"})
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert not (core_app_path / "templates").exists()
+    assert not (core_app_path / "views.py").exists()
+    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        assert "django_htmx" not in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "urls.py") as f:
+        assert "index" not in f.read()
+
+
+def test_htmx(cookies):
+    result = cookies.bake(extra_context={"html": "HTMX"})
+
+    core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert (core_app_path / "templates" / "index.html").exists()
+    assert (core_app_path / "views.py").exists()
+    assert (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
+
+    with open(result.project / "pyproject.toml") as f:
+        assert "django-htmx =" in f.read()
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "django_htmx" in content
+        assert "django_htmx.middleware.HtmxMiddleware" in content
+
+    with open(core_app_path / "templates" / "index.html") as f:
+        assert "{% static 'htmx.min.js.gz' %}" in f.read()
