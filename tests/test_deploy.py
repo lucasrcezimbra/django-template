@@ -7,6 +7,7 @@ def test_no(cookies):
 
     assert "Procfile" not in found_toplevel_files
     assert "Dockerfile" not in found_toplevel_files
+    assert ".dockerignore" not in found_toplevel_files
     assert "render.yaml" not in found_toplevel_files
     with open(result.project / "README.md") as f:
         content = f.read()
@@ -21,6 +22,7 @@ def test_docker(cookies):
     assert "Procfile" not in found_toplevel_files
     assert "render.yaml" not in found_toplevel_files
     assert "Dockerfile" in found_toplevel_files
+    assert ".dockerignore" in found_toplevel_files
     with open(result.project / "README.md") as f:
         content = f.read()
         assert "## Deploy" not in content
@@ -32,6 +34,7 @@ def test_heroku(cookies):
     found_toplevel_files = {f.basename for f in result.project.listdir()}
 
     assert "Dockerfile" not in found_toplevel_files
+    assert ".dockerignore" not in found_toplevel_files
     assert "render.yaml" not in found_toplevel_files
     assert "Procfile" in found_toplevel_files
     with open(result.project / "README.md") as f:
@@ -56,6 +59,7 @@ def test_render(cookies):
 
     assert "Procfile" not in found_toplevel_files
     assert "Dockerfile" not in found_toplevel_files
+    assert ".dockerignore" not in found_toplevel_files
     assert "render.yaml" in found_toplevel_files
     with open(result.project / "render.yaml") as f:
         assert f.read() == dedent(

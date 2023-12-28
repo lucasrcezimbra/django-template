@@ -1,0 +1,16 @@
+# env files
+.env
+
+# IDEs
+.vscode
+.idea
+
+# dependencies
+node_modules
+
+# docs
+README.md
+
+# git
+.git
+.gitignore

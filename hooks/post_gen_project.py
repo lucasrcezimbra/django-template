@@ -17,6 +17,7 @@ if __name__ == "__main__":
 
     if "{{cookiecutter.deploy}}" != "Docker":
         remove("Dockerfile")
+        remove(".dockerignore")
     if "{{cookiecutter.deploy}}" != "Heroku":
         remove("Procfile")
     if "{{cookiecutter.deploy}}" != "Render":
