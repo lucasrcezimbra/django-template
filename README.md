@@ -37,43 +37,63 @@ Optionals:
 
 
 ### Tree
-```
+\*optionals
+```shell
 api
 ├── api
 │   ├── asgi.py
 │   ├── core
 │   │   ├── admin.py
-│   │   ├── api.py
+│   │   ├── api.py*
 │   │   ├── apps.py
-│   │   ├── facades
+│   │   ├── __init__.py
+│   │   ├── managers.py
+│   │   ├── migrations
 │   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   ├── templates*
+│   │   │   └── index.html
+│   │   ├── tests
+│   │   │   ├── test_api.py*
+│   │   │   ├── test_crud.py*
+│   │   │   └── test_view_index.py*
+│   │   └── views.py*
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── static*
+│   │   └── htmx.min.js.gz
+│   ├── urls.py
+│   ├── users
+│   │   ├── admin.py
+│   │   ├── apps.py
 │   │   ├── __init__.py
 │   │   ├── managers.py
 │   │   ├── migrations
 │   │   │   ├── 0001_initial.py
 │   │   │   └── __init__.py
 │   │   ├── models.py
-│   │   ├── templates
-│   │   │   └── index.html
 │   │   ├── tests
-│   │   │   ├── test_api.py
-│   │   │   ├── test_crud.py
-│   │   │   ├── tests.py
-│   │   │   └── test_view_index.py
-│   │   └── views.py
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
+│   │   │   └── test_users.py
+│   │   └── views.py*
 │   └── wsgi.py
 ├── contrib
 │   ├── env-sample
 │   └── secret_gen.py
-├── docker-compose.yml
-├── Dockerfile
+├── docker-compose.yml*
+├── Dockerfile*
+├── .dockerignore*
+├── .env
+├── .github
+│   ├── dependabot.yml
+│   └── workflows
+│       └── python-app.yml
+├── .gitignore
 ├── manage.py
-├── Procfile
+├── .pre-commit-config.yaml
+├── Procfile*
 ├── pyproject.toml
-└── README.md
+├── README.md
+└── render.yaml*
 ```
 
 
