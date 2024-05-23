@@ -77,5 +77,28 @@ api
 ```
 
 
+## Rationales
+### Custom user model
+> If you’re starting a new project, it’s highly recommended to set up a custom
+> user model, even if the default User model is sufficient for you. This model
+> behaves identically to the default user model, but you’ll be able to customize
+> it in the future if the need arises
+
+from https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
+
+
+### Custom user model in a isolated app
+It's difficult to migrate the custom user model to a new app after the project
+is created.
+
+You may need to move your custom model to a new app to use app like
+[django-tenants](https://github.com/django-tenants/django-tenants) and
+[django-tenant-users](https://github.com/Corvia/django-tenant-users/).
+
+To avoid these migration issues, the custom user model is created in an isolated
+`users` app.
+
+
+
 ## Contribute
 Contributions are welcome, feel free to suggest improvements.

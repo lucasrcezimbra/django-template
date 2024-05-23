@@ -1,10 +1,12 @@
 from http import HTTPStatus
 
 import pytest
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from model_bakery import baker
 
-from {{cookiecutter.project_slug}}.core.models import User
+
+User = get_user_model()
 
 
 @pytest.mark.django_db

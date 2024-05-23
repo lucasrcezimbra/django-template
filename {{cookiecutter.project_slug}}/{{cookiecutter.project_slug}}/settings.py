@@ -24,6 +24,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default=[], cast=Csv())
 # Application definition
 INSTALLED_APPS = [
     "{{ cookiecutter.project_slug }}.core",
+    "{{ cookiecutter.project_slug }}.users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -110,7 +111,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Auth
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "users.User"
 
 
 {% if cookiecutter.staticfiles %}

@@ -5,8 +5,10 @@ def test_default(cookies):
     result = cookies.bake()
 
     core_app_path = result.project / DEFAULT_PROJECT / "core"
+    users_app_path = result.project / DEFAULT_PROJECT / "users"
     assert (core_app_path / "templates" / "index.html").exists()
     assert (core_app_path / "views.py").exists()
+    assert (users_app_path / "views.py").exists()
     assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
@@ -23,8 +25,10 @@ def test_no(cookies):
     result = cookies.bake(extra_context={"html": "No"})
 
     core_app_path = result.project / DEFAULT_PROJECT / "core"
+    users_app_path = result.project / DEFAULT_PROJECT / "users"
     assert not (core_app_path / "templates").exists()
     assert not (core_app_path / "views.py").exists()
+    assert not (users_app_path / "views.py").exists()
     assert not (core_app_path / "tests" / "test_view_index.py").exists()
     assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
