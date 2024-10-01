@@ -31,6 +31,7 @@ and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 Optionals:
 - [Django](https://github.com/adamchainz/django-htmx) [HTMX](https://htmx.org/)
 - [Django Ninja](https://github.com/vitalik/django-ninja) and [Django Ninja CRUD](https://github.com/hbakri/django-ninja-crud) to build APIs
+- [djLint](https://github.com/djlint/djLint) and [djade](https://github.com/adamchainz/djade)
 - [Dockerfile](https://www.docker.com/), [Heroku](https://www.heroku.com/) or [Render](https://render.com/) to deploy
 - [Sentry](https://sentry.io/) for error tracking
 - [WhiteNoise](https://github.com/evansd/whitenoise) to serve static files

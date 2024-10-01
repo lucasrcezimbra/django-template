@@ -20,6 +20,11 @@ def test_default(cookies):
     with open(core_app_path / "templates" / "index.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" not in f.read()
 
+    with open(result.project / ".pre-commit-config.yaml") as f:
+        content = f.read()
+        assert "djade" in content
+        assert "djLint" in content
+
 
 def test_no(cookies):
     result = cookies.bake(extra_context={"html": "No"})
@@ -41,6 +46,11 @@ def test_no(cookies):
     with open(result.project / DEFAULT_PROJECT / "urls.py") as f:
         assert "index" not in f.read()
 
+    with open(result.project / ".pre-commit-config.yaml") as f:
+        content = f.read()
+        assert "djade" not in content
+        assert "djLint" not in content
+
 
 def test_htmx(cookies):
     result = cookies.bake(extra_context={"html": "HTMX"})
@@ -60,3 +70,8 @@ def test_htmx(cookies):
 
     with open(core_app_path / "templates" / "index.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" in f.read()
+
+    with open(result.project / ".pre-commit-config.yaml") as f:
+        content = f.read()
+        assert "djade" in content
+        assert "djLint" in content

@@ -29,3 +29,16 @@ repos:
   hooks:
   - id: black
     types: [python]
+
+{% if cookiecutter.html != 'No' %}
+- repo: https://github.com/Riverside-Healthcare/djLint/
+  rev: v1.34.0
+  hooks:
+    - id: djlint-reformat-django
+
+- repo: https://github.com/adamchainz/djade-pre-commit
+  rev: 1.1.1
+  hooks:
+    - id: djade
+      args: [--target-version, "5.1"]
+{% endif %}
