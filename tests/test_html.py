@@ -23,6 +23,9 @@ def test_default(cookies):
     with open(core_app_path / "templates" / "base.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" not in f.read()
 
+    with open(core_app_path / "templates" / "index.html") as f:
+        assert "hx-" not in f.read()
+
     with open(result.project / ".pre-commit-config.yaml") as f:
         content = f.read()
         assert "djade" in content
@@ -78,6 +81,11 @@ def test_htmx(cookies):
 
     with open(core_app_path / "templates" / "base.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" in f.read()
+
+    with open(core_app_path / "templates" / "index.html") as f:
+        content = f.read()
+        assert "hx-get" in content
+        assert "hx-swap" in content
 
     with open(result.project / ".pre-commit-config.yaml") as f:
         content = f.read()

@@ -2,5 +2,5 @@
 
 {{"{% block content %}"}}
   <h1>Hello World</h1>
-  <div hx-get="/" hx-swap="outerHTML">Get Some HTML</div>
+  <div{% if cookiecutter.html == 'HTMX' %} hx-get="/" hx-swap="outerHTML"{% endif %}>Get Some HTML</div>
 {{"{% endblock content %}"}}
