@@ -6,6 +6,7 @@ def test_default(cookies):
 
     core_app_path = result.project / DEFAULT_PROJECT / "core"
     users_app_path = result.project / DEFAULT_PROJECT / "users"
+    assert (core_app_path / "templates" / "base.html").exists()
     assert (core_app_path / "templates" / "index.html").exists()
     assert (core_app_path / "views.py").exists()
     assert (users_app_path / "views.py").exists()
@@ -19,7 +20,7 @@ def test_default(cookies):
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         assert "django_htmx" not in f.read()
 
-    with open(core_app_path / "templates" / "index.html") as f:
+    with open(core_app_path / "templates" / "base.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" not in f.read()
 
     with open(result.project / ".pre-commit-config.yaml") as f:
@@ -60,6 +61,7 @@ def test_htmx(cookies):
     result = cookies.bake(extra_context={"html": "HTMX"})
 
     core_app_path = result.project / DEFAULT_PROJECT / "core"
+    assert (core_app_path / "templates" / "base.html").exists()
     assert (core_app_path / "templates" / "index.html").exists()
     assert (core_app_path / "views.py").exists()
     assert (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
@@ -74,7 +76,7 @@ def test_htmx(cookies):
         assert "django_htmx" in content
         assert "django_htmx.middleware.HtmxMiddleware" in content
 
-    with open(core_app_path / "templates" / "index.html") as f:
+    with open(core_app_path / "templates" / "base.html") as f:
         assert "{% static 'htmx.min.js.gz' %}" in f.read()
 
     with open(result.project / ".pre-commit-config.yaml") as f:
