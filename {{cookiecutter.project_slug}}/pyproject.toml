@@ -18,7 +18,7 @@ django-ninja = "1.2.0"
 {%- if cookiecutter.api == 'Django Ninja CRUD' %}
 django-ninja-crud = "0.2.0"
 {%- endif %}
-gunicorn = "22.0.0"
+gunicorn = "23.0.0"
 {%- if cookiecutter.database == 'PostgreSQL' %}
 psycopg2-binary = "2.9.9"
 {%- endif %}
@@ -31,10 +31,10 @@ whitenoise = {extras = ["brotli"], version = "6.7.0"}
 {%- endif %}
 
 [tool.poetry.group.dev.dependencies]
-model-bakery = "1.18.2"
-pre-commit = "3.7.1"
-pytest = "8.2.2"
-pytest-django = "4.8.0"
+model-bakery = "1.19.5"
+pre-commit = "3.8.0"
+pytest = "8.3.3"
+pytest-django = "4.9.0"
 pytest-mock = "3.14.0"
 
 {% if cookiecutter.html != "No" %}
