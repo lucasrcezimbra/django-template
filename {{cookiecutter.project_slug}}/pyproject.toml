@@ -37,6 +37,11 @@ pytest = "8.2.2"
 pytest-django = "4.8.0"
 pytest-mock = "3.14.0"
 
+{% if cookiecutter.html != "No" %}
+[tool.djlint]
+blank_line_after_tag="endblock,extends"
+blank_line_before_tag="block"
+{% endif %}
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "{{ cookiecutter.project_slug }}.settings"

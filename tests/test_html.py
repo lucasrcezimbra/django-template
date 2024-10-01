@@ -12,7 +12,9 @@ def test_default(cookies):
     assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "django_htmx" not in f.read()
+        content = f.read()
+        assert "django_htmx" not in content
+        assert "[tool.djlint]" in content
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         assert "django_htmx" not in f.read()
@@ -38,7 +40,9 @@ def test_no(cookies):
     assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "django_htmx" not in f.read()
+        content = f.read()
+        assert "django_htmx" not in content
+        assert "[tool.djlint]" not in content
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         assert "django_htmx" not in f.read()
@@ -61,7 +65,9 @@ def test_htmx(cookies):
     assert (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "django-htmx =" in f.read()
+        content = f.read()
+        assert "django-htmx =" in content
+        assert "[tool.djlint]" in content
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
