@@ -36,3 +36,7 @@ if __name__ == "__main__":
 
     if "{{cookiecutter.database}}" != "PostgreSQL":
         remove("docker-compose.yml")
+
+    if "{{cookiecutter.css}}" != "Bootstrap":
+        remove("{{cookiecutter.project_slug}}/static/bootstrap.min.css")
+        remove("{{cookiecutter.project_slug}}/static/bootstrap.min.js")

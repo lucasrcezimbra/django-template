@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>{{cookiecutter.project_name}}</title>
   {{"{% load static %}"}}
+  {% if cookiecutter.css == 'Bootstrap' %}
+  <link href="{{"{% static 'bootstrap.min.css' %}"}}" rel="stylesheet" async>
+  {% endif %}
   {% if cookiecutter.html == 'HTMX' %}
   <script src={{"\"{% static 'htmx.min.js.gz' %}\""}} defer></script>
   {% endif %}
@@ -12,5 +15,8 @@
   <div id="content">
     {{"{% block content %}{% endblock %}"}}
   </div>
+  {% if cookiecutter.css == 'Bootstrap' %}
+  <script src="{{"{% static 'bootstrap.min.js' %}"}}" defer></script>
+  {% endif %}
 </body>
 </html>

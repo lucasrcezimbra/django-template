@@ -4,7 +4,8 @@
   "github_username": "lucasrcezimbra",
   "database": ["PostgreSQL", "SQLite"],
   "api": ["No", "Django Ninja", "Django Ninja CRUD"],
-  "html": ["Default", "No", "HTMX"],
+  "html": ["Default", "HTMX", "No"],
+  "css": ["Bootstrap", "No"],
   "deploy": ["No", "Docker", "Heroku", "Render"],
   "use_sentry": true,
   "staticfiles": true
