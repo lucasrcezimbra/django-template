@@ -30,6 +30,16 @@ repos:
   - id: black
     types: [python]
 
+- repo: https://github.com/google/yamlfmt
+  rev: v0.13.0
+  hooks:
+    - id: yamlfmt
+
+- repo: https://github.com/rhysd/actionlint
+  rev: v1.7.1
+  hooks:
+    - id: actionlint
+
 {% if cookiecutter.html != 'No' %}
 - repo: https://github.com/Riverside-Healthcare/djLint/
   rev: v1.34.0
