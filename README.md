@@ -4,6 +4,17 @@ An opinionated Django start project template.
 
 
 ## How to Use
+### Using Cruft (Recommended)
+Cruft is compatible with Cookiecutter and is the recommended method because it
+allows you to update the project with the latest template changes using
+`cruft update`.
+
+```bash
+pip install cruft
+cruft create https://github.com/lucasrcezimbra/django-template
+```
+
+### Using Cookiecutter
 ```bash
 pip install -U cookiecutter
 cookiecutter https://github.com/lucasrcezimbra/django-template
