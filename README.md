@@ -29,10 +29,10 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 - [Gunicorn](https://gunicorn.org/) as WSGI HTTP Server
 - [PostgreSQL](https://www.postgresql.org/) database
 - [pre-commit](https://github.com/pre-commit/pre-commit) with
-[bandit](https://github.com/PyCQA/bandit),
 [black](https://github.com/psf/black),
-[flake8](https://github.com/pycqa/flake8),
-[isort](https://github.com/timothycrosley/isort),
+[ruff](https://github.com/astral-sh/ruff),
+[yamlfmt](https://github.com/google/yamlfmt),
+[actionlint](https://github.com/rhysd/actionlint),
 and [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
 - [pytest-django](https://github.com/pytest-dev/pytest-django),
 [pytest-mock](https://github.com/pytest-dev/pytest-mock),
