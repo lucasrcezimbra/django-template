@@ -1,9 +1,0 @@
-services:
-  database:
-    image: postgres
-    environment:
-      - LC_ALL=C.UTF-8
-      - POSTGRES_USER=test_project
-      - POSTGRES_PASSWORD=p4ssw0rd
-    ports:
-      - 5432:5432
