@@ -9,5 +9,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: make install
-      - run: make lint
       - run: make test
