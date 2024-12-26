@@ -9,14 +9,14 @@ build:
 dev:
 	{% if cookiecutter.database == 'PostgreSQL' %}
 	docker compose up -d
-	{% endif %}
+	{% endif -%}
 	poetry run python manage.py migrate
 	poetry run python manage.py runserver
 
 install:
 	{% if cookiecutter.database == 'PostgreSQL' %}
 	docker compose up -d
-	{% endif %}
+	{% endif -%}
 	poetry install
 	poetry run pre-commit install
 	cp contrib/env-sample .env
@@ -30,5 +30,5 @@ run:
 test:
 	{% if cookiecutter.database == 'PostgreSQL' %}
 	docker compose up -d
-	{% endif %}
+	{% endif -%}
 	poetry run pytest

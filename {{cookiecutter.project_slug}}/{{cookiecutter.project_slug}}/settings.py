@@ -1,16 +1,16 @@
 from pathlib import Path
 
-{% if cookiecutter.use_sentry %}
+{% if cookiecutter.use_sentry -%}
 import sentry_sdk
 {%- endif %}
 from decouple import Csv, config
 from dj_database_url import parse as dburl
 
-{% if cookiecutter.use_sentry %}
+{% if cookiecutter.use_sentry -%}
 SENTRY_DSN = config("SENTRY_DSN", default=None)
 if SENTRY_DSN:
     sentry_sdk.init(dsn=SENTRY_DSN, environment=config("ENV"))
-{%- endif %}
+{% endif -%}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,18 +30,18 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    {% if cookiecutter.staticfiles %}
+    {%- if cookiecutter.staticfiles %}
     "django.contrib.staticfiles",
     {%- endif %}
     "django_extensions",
-    {% if cookiecutter.html == "HTMX" %}
+    {%- if cookiecutter.html == "HTMX" %}
     "django_htmx",
     {%- endif %}
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    {% if cookiecutter.staticfiles %}
+    {%- if cookiecutter.staticfiles %}
     "whitenoise.middleware.WhiteNoiseMiddleware",
     {%- endif %}
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    {% if cookiecutter.html == "HTMX" %}
+    {%- if cookiecutter.html == "HTMX" %}
     "django_htmx.middleware.HtmxMiddleware",
     {%- endif %}
 ]
@@ -114,7 +114,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 
-{% if cookiecutter.staticfiles %}
+{%- if cookiecutter.staticfiles %}
 # Static
 STATICFILES_DIRS = [
     BASE_DIR / "{{cookiecutter.project_slug}}" / "static",
