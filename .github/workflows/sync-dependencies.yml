@@ -1,0 +1,48 @@
+name: Sync Dependencies
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '{{cookiecutter.project_slug}}/pyproject.toml'
+      - '{{cookiecutter.project_slug}}/poetry.lock'
+
+jobs:
+  sync-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Extract template dependencies
+        run: |
+          # Extract dependencies from root pyproject.toml template group
+          DEPS=$(python3 -c '
+          import toml
+          with open("pyproject.toml") as f:
+              data = toml.load(f)
+          deps = data["tool"]["poetry"]["group"]["template"]["dependencies"]
+          print("\n".join([f"{k} = \"{v}\"" if isinstance(v, str) else f"{k} = {v}" for k, v in deps.items()]))
+          ')
+
+          # Update template pyproject.toml
+          cd {{cookiecutter.project_slug}}
+          poetry add $DEPS
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: sync template dependencies'
+          title: 'chore: sync template dependencies'
+          body: 'Automated PR to sync dependencies between root and template pyproject.toml files'
+          branch: sync-dependencies
+          delete-branch: true
