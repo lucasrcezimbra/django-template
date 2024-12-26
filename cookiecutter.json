@@ -1,12 +1,31 @@
 {
+  "api": [
+    "No",
+    "Django Ninja",
+    "Django Ninja CRUD"
+  ],
+  "css": [
+    "Bootstrap",
+    "No"
+  ],
+  "database": [
+    "PostgreSQL",
+    "SQLite"
+  ],
+  "deploy": [
+    "No",
+    "Docker",
+    "Heroku",
+    "Render"
+  ],
+  "github_username": "lucasrcezimbra",
+  "html": [
+    "Default",
+    "HTMX",
+    "No"
+  ],
   "project_name": "API",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-  "github_username": "lucasrcezimbra",
-  "database": ["PostgreSQL", "SQLite"],
-  "api": ["No", "Django Ninja", "Django Ninja CRUD"],
-  "html": ["Default", "HTMX", "No"],
-  "css": ["Bootstrap", "No"],
-  "deploy": ["No", "Docker", "Heroku", "Render"],
-  "use_sentry": true,
-  "staticfiles": true
+  "staticfiles": true,
+  "use_sentry": true
 }
