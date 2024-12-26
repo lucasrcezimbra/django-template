@@ -31,11 +31,16 @@ whitenoise = {extras = ["brotli"], version = "6.7.0"}
 {%- endif %}
 
 [tool.poetry.group.dev.dependencies]
+black = "24.1.1"
+django-stubs = "4.2.7"
+isort = "5.13.2"
 model-bakery = "1.19.5"
+mypy = "1.8.0"
 pre-commit = "3.8.0"
 pytest = "8.3.3"
 pytest-django = "4.9.0"
 pytest-mock = "3.14.0"
+ruff = "0.1.14"
 
 {% if cookiecutter.html != "No" %}
 [tool.djlint]
@@ -56,3 +61,24 @@ line-length = 88
 [tool.ruff.per-file-ignores]
 "manage.py" = ["TRY003"]
 "**/tests/**" = ["S101"]
+
+[tool.mypy]
+python_version = "{{ cookiecutter.python_version }}"
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unreachable = true
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "{{ cookiecutter.project_slug }}.settings"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88

@@ -3,6 +3,10 @@ on: [push, pull_request]
 jobs:
   test-generated:
     runs-on: ubuntu-latest
+    env:
+      DJANGO_SETTINGS_MODULE: test_project.settings.local
+      DJANGO_SECRET_KEY: test-key-for-ci
+      DATABASE_URL: sqlite:///db.sqlite3
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -26,17 +30,24 @@ jobs:
             api="Django Ninja" \
             html="HTMX" \
             use_sentry="y"
+      - name: Verify project structure
+        run: |
+          test -d test_project || (echo "Project directory not created" && exit 1)
+          test -f test_project/pyproject.toml || (echo "pyproject.toml not found" && exit 1)
+          test -f test_project/manage.py || (echo "manage.py not found" && exit 1)
+          test -d test_project/test_project || (echo "Django project directory not found" && exit 1)
       - name: Install generated project dependencies
         working-directory: ./test_project
         run: |
           poetry install
-      - name: Run linting
+      - name: Run linting and type checking
         working-directory: ./test_project
         run: |
-          # Skip pre-commit hooks that check template files
           poetry run ruff check .
           poetry run black . --check
+          poetry run isort . --check-only
+          poetry run mypy .
       - name: Run tests
         working-directory: ./test_project
         run: |
-          poetry run pytest
+          poetry run pytest -v
