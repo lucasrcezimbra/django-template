@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "test_project"
+version = "0.0.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.12"
+dj-database-url = "2.2.0"
+django = "5.0.6"
+django-extensions = "3.2.3"
+django-htmx = "1.17.2"
+django-ninja = "1.2.0"
+gunicorn = "23.0.0"
+psycopg2-binary = "2.9.9"
+python-decouple = "3.8"
+sentry-sdk = {extras = ["django"], version = "2.7.1"}
+whitenoise = {extras = ["brotli"], version = "6.7.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "24.3.0"
+model-bakery = "1.19.5"
+pre-commit = "3.8.0"
+pytest = "8.3.3"
+pytest-django = "4.9.0"
+pytest-mock = "3.14.0"
+ruff = "0.3.4"
+
+
+[tool.djlint]
+blank_line_after_tag="endblock,extends"
+blank_line_before_tag="block"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "test_project.settings"
+python_files = "tests.py test_*.py *_tests.py"
+
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "S", "TRY"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"manage.py" = ["TRY003"]
+"**/tests/**" = ["S101"]

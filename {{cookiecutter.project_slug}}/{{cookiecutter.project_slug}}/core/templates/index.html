@@ -1,6 +1,6 @@
-{{'{% extends "base.html" %}'}}
+{{ '{% extends "base.html" %}' }}
 
-{{"{% block content %}"}}
+{{ "{% block content %}" }}
   <h1>Hello World</h1>
   <div{% if cookiecutter.html == 'HTMX' %} hx-get="/" hx-swap="outerHTML"{% endif %}>Get Some HTML</div>
-{{"{% endblock content %}"}}
+{{ "{% endblock content %}" }}
