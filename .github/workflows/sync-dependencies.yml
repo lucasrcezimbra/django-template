@@ -15,25 +15,34 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Extract template dependencies
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - name: Sync template dependencies
         run: |
           # Extract dependencies from root pyproject.toml template group
-          DEPS=$(python3 -c '
+          python3 -c '
           import toml
-          with open("pyproject.toml") as f:
-              data = toml.load(f)
-          deps = data["tool"]["poetry"]["group"]["template"]["dependencies"]
-          print("\n".join([f"{k} = \"{v}\"" if isinstance(v, str) else f"{k} = {v}" for k, v in deps.items()]))
-          ')
+          import json
 
-          # Update template pyproject.toml
+          # Read root pyproject.toml
+          with open("pyproject.toml") as f:
+              root_data = toml.load(f)
+          
+          # Read template pyproject.toml
+          with open("{{cookiecutter.project_slug}}/pyproject.toml") as f:
+              template_data = toml.load(f)
+          
+          # Get template dependencies
+          template_deps = root_data["tool"]["poetry"]["group"]["template"]["dependencies"]
+          
+          # Update template dependencies
+          template_data["tool"]["poetry"]["dependencies"].update(template_deps)
+          
+          # Write back to template pyproject.toml
+          with open("{{cookiecutter.project_slug}}/pyproject.toml", "w") as f:
+              toml.dump(template_data, f)
+          '
+          
+          # Update lock file
           cd {{cookiecutter.project_slug}}
-          poetry add $DEPS
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          commit-message: 'chore: sync template dependencies'
-          title: 'chore: sync template dependencies'
-          body: 'Automated PR to sync dependencies between root and template pyproject.toml files'
-          branch: sync-dependencies
-          delete-branch: true
+          poetry lock --no-update
