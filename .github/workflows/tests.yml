@@ -10,3 +10,4 @@ jobs:
           python-version: '3.11'
       - run: make install
       - run: make test
+      - run: make test-generated
