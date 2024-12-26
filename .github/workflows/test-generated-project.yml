@@ -19,6 +19,7 @@ jobs:
             project_name="Test Project" \
             project_slug="test_project" \
             description="Test project for CI" \
+            database="SQLite" \
             author_name="OpenHands" \
             author_email="openhands@all-hands.dev" \
             python_version="3.11" \
