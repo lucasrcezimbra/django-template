@@ -43,6 +43,7 @@ jobs:
       - name: Run linting and type checking
         working-directory: ./test_project
         run: |
+          poetry run pre-commit run -a
           poetry run ruff check .
           poetry run black . --check
           poetry run isort . --check-only
