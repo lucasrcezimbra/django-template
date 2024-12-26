@@ -8,9 +8,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install dependencies
-        run: |
-          pipx install poetry
-          poetry install
-      - run: poetry run pre-commit run -a
-      - run: poetry run pytest
+      - run: make install
+      - run: make lint
+      - run: make test
