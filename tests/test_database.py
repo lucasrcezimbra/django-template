@@ -18,10 +18,9 @@ def test_default_postgres(cookies):
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" in f.read()
 
-    with open(result.project / ".github" / "workflows" / "python-app.yml") as f:
+    with open(result.project / "Makefile") as f:
         content = f.read()
-        assert "docker-compose up -d" in content
-        assert "sleep 5" in content
+        assert "docker compose up -d" in content
 
 
 def test_sqlite(cookies):
@@ -41,7 +40,6 @@ def test_sqlite(cookies):
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" not in f.read()
 
-    with open(result.project / ".github" / "workflows" / "python-app.yml") as f:
+    with open(result.project / "Makefile") as f:
         content = f.read()
-        assert "docker-compose up -d" not in content
-        assert "sleep 5" not in content
+        assert "docker compose up -d" not in content

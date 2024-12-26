@@ -16,18 +16,6 @@ jobs:
       with:
         python-version: '3.11'
         cache: 'poetry'
-    - name: Install dependencies
-      run: |
-        poetry install
-        poetry run pre-commit install
-        cp contrib/env-sample .env
-    - run: poetry run pre-commit run -a
-    {%- if cookiecutter.database == 'PostgreSQL' %}
-    - name: pytest
-      run: |
-        docker-compose up -d
-        sleep 5
-        poetry run pytest
-    {%- elif cookiecutter.database == 'SQLite' %}
-    - run: poetry run pytest
-    {%- endif %}
+    - run: make install
+    - run: make lint
+    - run: make test
