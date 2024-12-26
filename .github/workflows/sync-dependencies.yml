@@ -27,22 +27,22 @@ jobs:
           # Read root pyproject.toml
           with open("pyproject.toml") as f:
               root_data = toml.load(f)
-          
+
           # Read template pyproject.toml
           with open("{{cookiecutter.project_slug}}/pyproject.toml") as f:
               template_data = toml.load(f)
-          
+
           # Get template dependencies
           template_deps = root_data["tool"]["poetry"]["group"]["template"]["dependencies"]
-          
+
           # Update template dependencies
           template_data["tool"]["poetry"]["dependencies"].update(template_deps)
-          
+
           # Write back to template pyproject.toml
           with open("{{cookiecutter.project_slug}}/pyproject.toml", "w") as f:
               toml.dump(template_data, f)
           '
-          
+
           # Update lock file
           cd {{cookiecutter.project_slug}}
           poetry lock --no-update
