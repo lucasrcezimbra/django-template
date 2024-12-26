@@ -15,30 +15,53 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
       - name: Sync template dependencies
         run: |
           # Extract dependencies from root pyproject.toml template group
           python3 -c '
           import toml
-          import json
+          import re
 
           # Read root pyproject.toml
           with open("pyproject.toml") as f:
               root_data = toml.load(f)
 
-          # Read template pyproject.toml
+          # Read template pyproject.toml as text to preserve conditionals
           with open("{{cookiecutter.project_slug}}/pyproject.toml") as f:
-              template_data = toml.load(f)
+              template_content = f.read()
 
-          # Get template dependencies
+          # Get template dependencies from root
           template_deps = root_data["tool"]["poetry"]["group"]["template"]["dependencies"]
 
-          # Update template dependencies
-          template_data["tool"]["poetry"]["dependencies"].update(template_deps)
+          # Update versions in template pyproject.toml while preserving conditionals
+          for package, version_info in template_deps.items():
+              # Handle both string versions and dict versions with extras
+              if isinstance(version_info, str):
+                  version = version_info
+                  pattern = f"{package} = \\"[^\\"]+"
+                  replacement = f"{package} = \\"{version}\\""
+              else:
+                  extras = version_info.get("extras", [])
+                  version = version_info["version"]
+                  extras_str = ", ".join(extras) if extras else ""
+                  if extras_str:
+                      pattern = f"{package} = {{[^}}]+}}"
+                      replacement = f"{package} = {{extras = [\\"{\\"\\", \\"\\".join(extras)}\\"], version = \\"{version}\\"}}"
+                  else:
+                      pattern = f"{package} = \\"[^\\"]+"
+                      replacement = f"{package} = \\"{version}\\""
+
+              # Only replace if the package exists in the template (respecting conditionals)
+              if re.search(pattern, template_content):
+                  template_content = re.sub(pattern, replacement, template_content)
 
           # Write back to template pyproject.toml
           with open("{{cookiecutter.project_slug}}/pyproject.toml", "w") as f:
-              toml.dump(template_data, f)
+              f.write(template_content)
           '
 
           # Update lock file
