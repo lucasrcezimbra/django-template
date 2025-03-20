@@ -1,7 +1,7 @@
 .PHONY: install lint test
 
 install:
-	poetry install
+	poetry install --no-root
 
 lint:
 	poetry run pre-commit run -a
