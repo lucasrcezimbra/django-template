@@ -20,6 +20,24 @@ pytest = "^8.3.4"
 pytest-cookies = "^0.7.0"
 pre-commit = "^4.0.1"
 
+[tool.poetry.group.template.dependencies]
+dj-database-url = "2.2.0"
+django = "5.0.6"
+django-extensions = "3.2.3"
+django-htmx = "1.17.2"
+django-ninja = "1.2.0"
+django-ninja-crud = "0.2.0"
+gunicorn = "23.0.0"
+model-bakery = "1.19.5"
+pre-commit = "3.8.0"
+psycopg2-binary = "2.9.9"
+pytest = "8.3.3"
+pytest-django = "4.9.0"
+pytest-mock = "3.14.0"
+python-decouple = "3.8"
+sentry-sdk = {extras = ["django"], version = "2.7.1"}
+whitenoise = {extras = ["brotli"], version = "6.7.0"}
+
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
