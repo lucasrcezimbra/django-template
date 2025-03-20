@@ -28,8 +28,6 @@ if __name__ == "__main__":
         remove("{{cookiecutter.project_slug}}/core/tests/test_view_index.py")
         remove("{{cookiecutter.project_slug}}/core/views.py")
         remove("{{cookiecutter.project_slug}}/users/views.py")
-    if "{{cookiecutter.html}}" != "HTMX":
-        remove("{{cookiecutter.project_slug}}/static/htmx.min.js.gz")
 
     if "{{cookiecutter.staticfiles}}" != "True":
         shutil.rmtree("{{cookiecutter.project_slug}}/static/")

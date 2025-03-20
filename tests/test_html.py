@@ -10,7 +10,6 @@ def test_default(cookies):
     assert (core_app_path / "templates" / "index.html").exists()
     assert (core_app_path / "views.py").exists()
     assert (users_app_path / "views.py").exists()
-    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
         content = f.read()
@@ -21,7 +20,7 @@ def test_default(cookies):
         assert "django_htmx" not in f.read()
 
     with open(core_app_path / "templates" / "base.html") as f:
-        assert "{% static 'htmx.min.js.gz' %}" not in f.read()
+        assert "htmx" not in f.read()
 
     with open(core_app_path / "templates" / "index.html") as f:
         assert "hx-" not in f.read()
@@ -41,7 +40,6 @@ def test_no(cookies):
     assert not (core_app_path / "views.py").exists()
     assert not (users_app_path / "views.py").exists()
     assert not (core_app_path / "tests" / "test_view_index.py").exists()
-    assert not (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
         content = f.read()
@@ -67,7 +65,6 @@ def test_htmx(cookies):
     assert (core_app_path / "templates" / "base.html").exists()
     assert (core_app_path / "templates" / "index.html").exists()
     assert (core_app_path / "views.py").exists()
-    assert (result.project / DEFAULT_PROJECT / "static" / "htmx.min.js.gz").exists()
 
     with open(result.project / "pyproject.toml") as f:
         content = f.read()
@@ -80,7 +77,9 @@ def test_htmx(cookies):
         assert "django_htmx.middleware.HtmxMiddleware" in content
 
     with open(core_app_path / "templates" / "base.html") as f:
-        assert "{% static 'htmx.min.js.gz' %}" in f.read()
+        content = f.read()
+        assert "{% load django_htmx %}" in content
+        assert "{% htmx_script %}" in content
 
     with open(core_app_path / "templates" / "index.html") as f:
         content = f.read()
