@@ -77,8 +77,15 @@ WSGI_APPLICATION = "{{ cookiecutter.project_slug }}.wsgi.application"
 
 
 # Database
+default_db = config("DATABASE_URL", cast=dburl)
+{% if cookiecutter.database != "SQLite" %}
+# Connection pool settings for PostgreSQL
+default_db["CONN_MAX_AGE"] = 60  # seconds
+default_db["CONN_HEALTH_CHECKS"] = True
+default_db["OPTIONS"] = {**default_db.get("OPTIONS", {}), "pool_size": 10}
+{% endif %}
 DATABASES = {
-    "default": config("DATABASE_URL", cast=dburl),
+    "default": default_db,
 }
 
 

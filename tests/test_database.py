@@ -21,6 +21,12 @@ def test_default_postgres(cookies):
     with open(result.project / "Makefile") as f:
         content = f.read()
         assert "docker compose up -d" in content
+        
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "default_db[\"CONN_MAX_AGE\"] = 60" in content
+        assert "default_db[\"CONN_HEALTH_CHECKS\"] = True" in content
+        assert "\"pool_size\": 10" in content
 
 
 def test_sqlite(cookies):
@@ -43,3 +49,9 @@ def test_sqlite(cookies):
     with open(result.project / "Makefile") as f:
         content = f.read()
         assert "docker compose up -d" not in content
+        
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "default_db[\"CONN_MAX_AGE\"]" not in content
+        assert "default_db[\"CONN_HEALTH_CHECKS\"]" not in content
+        assert "\"pool_size\"" not in content
