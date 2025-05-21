@@ -13,7 +13,7 @@ def test_default_postgres(cookies):
         assert "DATABASE_URL=postgres://api:p4ssw0rd@localhost:5432/api" in f.read()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "psycopg2-binary" in f.read()
+        assert "psycopg" in f.read()
 
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" in f.read()
@@ -35,7 +35,7 @@ def test_sqlite(cookies):
         assert "DATABASE_URL=sqlite:///db.sqlite3" in f.read()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "psycopg2-binary" not in f.read()
+        assert "psycopg" not in f.read()
 
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" not in f.read()
