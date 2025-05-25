@@ -20,6 +20,28 @@ pytest = "^8.3.5"
 pytest-cookies = "^0.7.0"
 pre-commit = "^4.2.0"
 
+[tool.poetry.group.template.dependencies]
+# Dependencies for the template project (automatically synced to {{cookiecutter.project_slug}}/pyproject.toml)
+dj-database-url = "2.2.0"
+django = "5.0.6"
+django-extensions = "3.2.3"
+django-htmx = "1.23.0"
+django-ninja = "1.2.0"
+django-ninja-crud = "0.2.0"
+gunicorn = "23.0.0"
+psycopg = "3.2.9"
+python-decouple = "3.8"
+sentry-sdk = {extras = ["django"], version = "2.7.1"}
+whitenoise = {extras = ["brotli"], version = "6.7.0"}
+
+# Template dev dependencies
+[tool.poetry.group.template-dev.dependencies]
+model-bakery = "1.19.5"
+pre-commit = "3.8.0"
+pytest = "8.3.3"
+pytest-django = "4.9.0"
+pytest-mock = "3.14.0"
+
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
