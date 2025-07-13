@@ -119,19 +119,12 @@ def test_feature(cookies):
 ## Maintenance Notes
 
 ### Dependencies
-- Keep dependencies in `pyproject.toml` up to date
-- Template generates projects with latest stable Django version
 - Optional dependencies are included based on configuration
 
 ### Documentation
 - Main documentation is in `README.md`
 - Feature-specific documentation should be included in generated project README
 - Keep the features list in README.md synchronized with `cookiecutter.json`
-
-### Backward Compatibility
-- Template changes should maintain compatibility with existing configurations
-- New features should be optional by default
-- Deprecated features should be phased out gradually
 
 ## Testing Commands
 
