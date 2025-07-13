@@ -20,7 +20,7 @@ django-ninja-crud = "0.2.0"
 {%- endif %}
 gunicorn = "23.0.0"
 {%- if cookiecutter.database == 'PostgreSQL' %}
-psycopg = "3.2.9"
+psycopg = {extras = ["pool"], version = "3.2.9"}
 {%- endif %}
 python-decouple = "3.8"
 {%- if cookiecutter.use_sentry %}
