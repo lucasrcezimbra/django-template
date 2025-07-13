@@ -2,6 +2,7 @@
 
 install:
 	poetry install --no-root
+	poetry run pre-commit install
 
 lint:
 	poetry run pre-commit run -a
