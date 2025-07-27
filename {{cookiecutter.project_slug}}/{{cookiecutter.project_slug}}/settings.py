@@ -5,6 +5,7 @@ import sentry_sdk
 {%- endif %}
 from decouple import Csv, config
 from dj_database_url import parse as dburl
+from pythonjsonlogger.json import JsonFormatter
 
 {% if cookiecutter.use_sentry -%}
 SENTRY_DSN = config("SENTRY_DSN", default=None)
@@ -135,7 +136,8 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "structured": {
-            "format": '{"level": "%(levelname)s", "time": "%(asctime)s", "module": "%(module)s", "process": %(process)d, "thread": %(thread)d, "message": "%(message)s"}',
+            "()": JsonFormatter,
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
         },
         "plaintext": {
             "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
