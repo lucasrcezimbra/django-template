@@ -18,8 +18,8 @@ def test_default_logging_config(cookies):
 
     # Check formatters are present
     assert '"formatters": {' in settings_content
-    assert '"verbose"' in settings_content
-    assert '"simple"' in settings_content
+    assert '"structured"' in settings_content
+    assert '"plaintext"' in settings_content
 
     # Check handlers are present
     assert '"handlers": {' in settings_content
@@ -33,7 +33,10 @@ def test_default_logging_config(cookies):
 
     # Check that environment variable configuration is used
     assert 'config("LOG_LEVEL"' in settings_content
-    assert 'config("DJANGO_LOG_LEVEL"' in settings_content
+    assert 'config("LOG_FORMATTER"' in settings_content
+    
+    # Check that DJANGO_LOG_LEVEL is not used anymore
+    assert 'config("DJANGO_LOG_LEVEL"' not in settings_content
 
 
 def test_logging_config_with_custom_project_slug(cookies):
@@ -48,16 +51,16 @@ def test_logging_config_with_custom_project_slug(cookies):
     assert '"my_project": {' in settings_content
 
 
-def test_logging_config_debug_formatter(cookies):
-    """Test that verbose formatter is used when DEBUG is True."""
+def test_logging_config_formatter_selection(cookies):
+    """Test that formatter selection is based on LOG_FORMATTER environment variable."""
     result = cookies.bake()
 
     settings_file = result.project / "api" / "settings.py"
     with open(settings_file) as f:
         settings_content = f.read()
 
-    # Check that formatter selection is based on DEBUG setting
-    assert '"formatter": "verbose" if DEBUG else "simple"' in settings_content
+    # Check that formatter selection uses LOG_FORMATTER environment variable
+    assert '"formatter": config("LOG_FORMATTER", default="structured")' in settings_content
 
 
 def test_logging_config_without_staticfiles(cookies):

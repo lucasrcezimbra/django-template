@@ -134,19 +134,18 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
-            "style": "{",
+        "structured": {
+            "format": '{"level": "%(levelname)s", "time": "%(asctime)s", "module": "%(module)s", "process": %(process)d, "thread": %(thread)d, "message": "%(message)s"}',
         },
-        "simple": {
-            "format": "{levelname} {message}",
+        "plaintext": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
             "style": "{",
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatter": "verbose" if DEBUG else "simple",
+            "formatter": config("LOG_FORMATTER", default="structured"),
         },
     },
     "root": {
@@ -156,7 +155,7 @@ LOGGING = {
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": config("DJANGO_LOG_LEVEL", default="INFO"),
+            "level": config("LOG_LEVEL", default="INFO"),
             "propagate": False,
         },
         "{{ cookiecutter.project_slug }}": {
