@@ -38,6 +38,7 @@ and [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
 [pytest-mock](https://github.com/pytest-dev/pytest-mock),
 and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
+- Child project triggering on release - automatically triggers child projects to update with latest template changes
 
 Optionals:
 - [Django](https://github.com/adamchainz/django-htmx) [HTMX](https://htmx.org/)
@@ -130,6 +131,59 @@ You may need to move your custom model to a new app to use app like
 To avoid these migration issues, the custom user model is created in an isolated
 `users` app.
 
+
+## Child Project Updates
+
+This template includes an automated mechanism to trigger child projects (projects created from this template) to update when a new release is published.
+
+### How it works
+
+1. When a new release is created in this repository, the "Trigger Child Projects" workflow runs
+2. The workflow sends repository dispatch events to configured child repositories
+3. Child repositories can listen for these events and automatically run `cruft update` to get the latest template changes
+
+### Setup for Repository Maintainers
+
+To configure which child repositories should be triggered:
+
+1. Set up the `CHILD_REPOSITORIES` repository variable with a comma-separated list of repositories (format: `owner/repo`)
+   - Example: `user1/my-project,user2/another-project`
+
+2. Create a `CHILD_PROJECTS_TOKEN` secret with a GitHub personal access token that has `repo` scope for the child repositories
+
+### Setup for Child Projects
+
+Child projects need to add a workflow to listen for repository dispatch events:
+
+```yaml
+name: Update from Template
+on:
+  repository_dispatch:
+    types: [cruft_update]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install cruft
+        run: pip install cruft
+      - name: Update from template
+        run: cruft update --skip-apply-ask
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "Update from template ${{ github.event.client_payload.template_version }}"
+          body: |
+            Automated update from django-template version ${{ github.event.client_payload.template_version }}
+
+            Template URL: ${{ github.event.client_payload.template_url }}
+          branch: template-update
+```
 
 
 ## Contribute
