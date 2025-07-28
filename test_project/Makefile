@@ -7,13 +7,13 @@ build:
 	poetry run python manage.py migrate
 
 dev:
-	
+
 	docker compose up -d
 	poetry run python manage.py migrate
 	poetry run python manage.py runserver
 
 install:
-	
+
 	docker compose up -d
 	poetry install
 	poetry run pre-commit install
@@ -30,6 +30,6 @@ run:
 	poetry run gunicorn test_project.wsgi:application
 
 test:
-	
+
 	docker compose up -d
 	poetry run pytest

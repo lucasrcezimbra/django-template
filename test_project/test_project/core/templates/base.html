@@ -4,20 +4,20 @@
         <meta charset="UTF-8">
         <title>API</title>
         {% load static %}
-        
+
         <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" async>
-        
-        
+
+
         {% load django_htmx %}
         {% htmx_script %}
-        
+
     </head>
     <body>
         <div id="content">
             {% block content %}{% endblock %}
         </div>
-        
+
         <script src="{% static 'bootstrap.min.js' %}" defer></script>
-        
+
     </body>
 </html>
