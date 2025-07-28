@@ -1,6 +1,3 @@
-import yaml
-
-
 def test_cruft_update_workflow_exists(cookies):
     """Test that the cruft update workflow is included in the generated project."""
     result = cookies.bake()
