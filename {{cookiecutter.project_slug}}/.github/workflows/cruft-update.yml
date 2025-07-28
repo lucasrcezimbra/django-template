@@ -15,8 +15,7 @@ jobs:
 
       - uses: actions/setup-python@v5
 
-      - name: Install cruft
-        run: pip install cruft
+      - run: pip install cruft
 
       - name: Check for template updates
         id: cruft-check
