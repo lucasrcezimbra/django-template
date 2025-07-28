@@ -10,10 +10,10 @@ from {{cookiecutter.project_slug}}.core.views import index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    {% if cookiecutter.html != "No" -%}
+    {%- if cookiecutter.html != "No" %}
     path("", index, name="index"),
     {%- endif %}
-    {% if cookiecutter.api != "No" -%}
+    {%- if cookiecutter.api != "No" %}
     path("api/", api.urls),
     {%- endif %}
 ]
