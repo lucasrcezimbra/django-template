@@ -7,6 +7,10 @@ name: Cruft Update
   workflow_dispatch:
     # Allow manual trigger
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   cruft-update:
     runs-on: ubuntu-latest
