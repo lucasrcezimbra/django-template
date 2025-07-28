@@ -15,5 +15,5 @@ test-generated:
 	poetry run cookiecutter . --no-input database="SQLite" project_slug="test_project" css="No"
 	cd test_project/ && make install
 	cd test_project/ && make test
-	# TODO: cd test_project/ && git init && git add . && make lint
+	cd test_project/ && git init && git add . && git config user.email "test@example.com" && git config user.name "Test User" && make lint
 	rm -rf test_project/
