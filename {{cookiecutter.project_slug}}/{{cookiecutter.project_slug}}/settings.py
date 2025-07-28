@@ -131,6 +131,8 @@ STORAGES = {
 
 
 # Logging
+LOG_LEVEL = config("LOG_LEVEL", default="INFO")
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -152,17 +154,17 @@ LOGGING = {
     },
     "root": {
         "handlers": ["console"],
-        "level": config("LOG_LEVEL", default="INFO"),
+        "level": LOG_LEVEL,
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": config("LOG_LEVEL", default="INFO"),
+            "level": LOG_LEVEL,
             "propagate": False,
         },
         "{{ cookiecutter.project_slug }}": {
             "handlers": ["console"],
-            "level": config("LOG_LEVEL", default="INFO"),
+            "level": LOG_LEVEL,
             "propagate": False,
         },
     },

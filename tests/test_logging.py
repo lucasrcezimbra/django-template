@@ -38,7 +38,7 @@ def test_default_logging_config(cookies):
     assert '"api"' in settings_content  # project slug
 
     # Check that environment variable configuration is used
-    assert 'config("LOG_LEVEL"' in settings_content
+    assert 'LOG_LEVEL = config("LOG_LEVEL"' in settings_content
     assert 'config("LOG_FORMATTER"' in settings_content
 
     # Check that DJANGO_LOG_LEVEL is not used anymore
