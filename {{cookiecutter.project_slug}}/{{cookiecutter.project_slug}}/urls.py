@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path
+{%- if cookiecutter.api != "No" %}
 
-{% if cookiecutter.api != "No" -%}
 from {{cookiecutter.project_slug}}.core.api import api
-{% endif -%}
-{% if cookiecutter.html != "No" -%}
+{%- endif %}
+{%- if cookiecutter.html != "No" %}
+
 from {{cookiecutter.project_slug}}.core.views import index
 {%- endif %}
 
