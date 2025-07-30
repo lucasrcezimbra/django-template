@@ -14,7 +14,11 @@
     </head>
     <body>
         <div id="content">
-            {{"{% block content %}{% endblock %}"}}
+
+            {{"{% block content %}"}}
+
+            {{"{% endblock %}"}}
+
         </div>
         {%- if cookiecutter.css == 'Bootstrap' %}
         <script src="{{"{% static 'bootstrap.min.js' %}"}}" defer></script>
