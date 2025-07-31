@@ -4,5 +4,7 @@ def test_cruft_update_workflow_exists(cookies):
 
     assert result.exit_code == 0
 
-    workflow_path = result.project_path / ".github" / "workflows" / "cruft-update.yml"
+    workflow_path = (
+        result.project_path / ".github" / "workflows" / "template-update.yml"
+    )
     assert workflow_path.exists()
