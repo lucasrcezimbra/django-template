@@ -7,7 +7,7 @@ name: Cruft Update
 permissions:
   contents: write
   pull-requests: write
-  workflows: write
+  actions: write
 jobs:
   cruft-update:
     runs-on: ubuntu-latest
