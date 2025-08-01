@@ -5,6 +5,7 @@ import sentry_sdk
 {%- endif %}
 from decouple import Csv, config
 from dj_database_url import parse as dburl
+from pythonjsonlogger.json import JsonFormatter
 
 {% if cookiecutter.use_sentry -%}
 SENTRY_DSN = config("SENTRY_DSN", default=None)
@@ -127,3 +128,44 @@ STORAGES = {
     },
 }
 {%- endif %}
+
+
+# Logging
+LOG_LEVEL = config("LOG_LEVEL", default="INFO")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "structured": {
+            "()": JsonFormatter,
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+        },
+        "plaintext": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": config("LOG_FORMATTER", default="structured"),
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": LOG_LEVEL,
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": LOG_LEVEL,
+            "propagate": False,
+        },
+        "{{ cookiecutter.project_slug }}": {
+            "handlers": ["console"],
+            "level": LOG_LEVEL,
+            "propagate": False,
+        },
+    },
+}
