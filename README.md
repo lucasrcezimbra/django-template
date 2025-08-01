@@ -27,7 +27,7 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 - [docker](https://www.docker.com/) with [compose](https://github.com/docker/compose)
 - [GitHub](https://github.com/) Actions for CI
 - [Gunicorn](https://gunicorn.org/) as WSGI HTTP Server
-- [PostgreSQL](https://www.postgresql.org/) database
+- [PostgreSQL](https://www.postgresql.org/) database with connection pooling enabled
 - [pre-commit](https://github.com/pre-commit/pre-commit) with
 [black](https://github.com/psf/black),
 [ruff](https://github.com/astral-sh/ruff),
