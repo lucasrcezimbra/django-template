@@ -13,7 +13,9 @@ def test_default_postgres(cookies):
         assert "DATABASE_URL=postgres://api:p4ssw0rd@localhost:5432/api" in f.read()
 
     with open(result.project / "pyproject.toml") as f:
-        assert "psycopg" in f.read()
+        content = f.read()
+        assert "psycopg" in content
+        assert 'extras = ["pool"]' in content
 
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" in f.read()
@@ -21,6 +23,13 @@ def test_default_postgres(cookies):
     with open(result.project / "Makefile") as f:
         content = f.read()
         assert "docker compose up -d" in content
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert (
+            'default_db["OPTIONS"] = {**default_db.get("OPTIONS", {}), "pool": True}'
+            in content
+        )
 
 
 def test_sqlite(cookies):
@@ -43,3 +52,8 @@ def test_sqlite(cookies):
     with open(result.project / "Makefile") as f:
         content = f.read()
         assert "docker compose up -d" not in content
+
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert 'default_db["OPTIONS"]' not in content
+        assert '"pool"' not in content
