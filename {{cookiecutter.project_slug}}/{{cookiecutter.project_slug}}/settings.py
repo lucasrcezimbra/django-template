@@ -78,7 +78,7 @@ WSGI_APPLICATION = "{{ cookiecutter.project_slug }}.wsgi.application"
 
 # Database
 default_db = config("DATABASE_URL", cast=dburl)
-{% if cookiecutter.database != "SQLite" %}
+{% if cookiecutter.database == "PostgreSQL" %}
 default_db["OPTIONS"] = {**default_db.get("OPTIONS", {}), "pool": True}
 {% endif %}
 DATABASES = {
