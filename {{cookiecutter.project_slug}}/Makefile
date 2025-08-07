@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := dev
-.PHONY: build dev install lint run test
+.PHONY: build dev install lint run test update-template
 
 build:
 	poetry install
@@ -32,3 +32,6 @@ test:
 	docker compose up -d
 	{% endif -%}
 	poetry run pytest
+
+update-template:
+	poetry run cruft update --skip-apply-ask
