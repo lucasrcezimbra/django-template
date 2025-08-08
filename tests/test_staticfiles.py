@@ -14,16 +14,18 @@ def test_default_true(cookies):
         assert (
             dedent(
                 """\
-                    STATICFILES_DIRS = [
-                        BASE_DIR / "api" / "static",
-                    ]
-                    STATIC_ROOT = BASE_DIR / "staticfiles"
-                    STATIC_URL = "/static/"
-                    STORAGES = {
-                        "staticfiles": {
-                            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-                        },
-                    }"""
+                # Static
+                STATICFILES_DIRS = [
+                    BASE_DIR / "api" / "static",
+                ]
+                STATIC_ROOT = BASE_DIR / "staticfiles"
+                STATIC_URL = "/static/"
+
+                STORAGES = {
+                    "staticfiles": {
+                        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+                    },
+                }"""
             )
             in content
         )
@@ -47,3 +49,67 @@ def test_false(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         assert "whitenoise" not in f.read()
+
+
+def test_html_no_uses_whitenoise(cookies):
+    """Test that when html is 'No', WhiteNoise storage is used instead of ManifestStaticFilesStorage"""
+    result = cookies.bake(extra_context={"html": "No"})
+
+    assert (result.project / DEFAULT_PROJECT / "static").exists()
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "django.contrib.staticfiles" in content
+        assert "whitenoise.middleware.WhiteNoiseMiddleware" in content
+        assert (
+            dedent(
+                """\
+                # Static
+                STATICFILES_DIRS = [
+                    BASE_DIR / "api" / "static",
+                ]
+                STATIC_ROOT = BASE_DIR / "staticfiles"
+                STATIC_URL = "/static/"
+
+                STORAGES = {
+                    "staticfiles": {
+                        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+                    },
+                }"""
+            )
+            in content
+        )
+
+    with open(result.project / "pyproject.toml") as f:
+        assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
+
+
+def test_html_htmx_uses_manifest(cookies):
+    """Test that when html is 'HTMX', ManifestStaticFilesStorage is used"""
+    result = cookies.bake(extra_context={"html": "HTMX"})
+
+    assert (result.project / DEFAULT_PROJECT / "static").exists()
+    with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
+        content = f.read()
+        assert "django.contrib.staticfiles" in content
+        assert "whitenoise.middleware.WhiteNoiseMiddleware" in content
+        assert (
+            dedent(
+                """\
+                # Static
+                STATICFILES_DIRS = [
+                    BASE_DIR / "api" / "static",
+                ]
+                STATIC_ROOT = BASE_DIR / "staticfiles"
+                STATIC_URL = "/static/"
+
+                STORAGES = {
+                    "staticfiles": {
+                        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+                    },
+                }"""
+            )
+            in content
+        )
+
+    with open(result.project / "pyproject.toml") as f:
+        assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
