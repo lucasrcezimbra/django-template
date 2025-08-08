@@ -132,5 +132,18 @@ To avoid these migration issues, the custom user model is created in an isolated
 
 
 
+## Dependency Management
+
+The template manages dependencies in two locations:
+- Root `pyproject.toml`: Contains dependencies for the template itself
+- `{{cookiecutter.project_slug}}/pyproject.toml`: Contains dependencies for projects generated from the template
+
+To ensure consistent dependency updates, the template dependencies are synchronized through:
+1. A "template" group in the root `pyproject.toml` that mirrors the dependencies in `{{cookiecutter.project_slug}}/pyproject.toml`
+2. A GitHub workflow that automatically syncs dependencies from the root file to the template file on pull requests
+
+This allows Dependabot to update all dependencies by targeting the root `pyproject.toml`, and those updates are automatically propagated to the template.
+
+
 ## Contribute
 Contributions are welcome, feel free to suggest improvements.
