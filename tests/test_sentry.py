@@ -7,7 +7,9 @@ def test_default_true(cookies):
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "import sentry_sdk" in content
+        assert "from sentry_sdk.integrations.django import DjangoIntegration" in content
         assert 'SENTRY_DSN = config("SENTRY_DSN", default=None)' in content
+        assert "DjangoIntegration(cache_spans=True)" in content
 
     with open(result.project / "contrib" / "env-sample") as f:
         assert "SENTRY_DSN=" in f.read()
@@ -25,6 +27,10 @@ def test_false(cookies):
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:
         content = f.read()
         assert "import sentry_sdk" not in content
+        assert (
+            "from sentry_sdk.integrations.django import DjangoIntegration"
+            not in content
+        )
         assert 'SENTRY_DSN = config("SENTRY_DSN", default=None)' not in content
 
     with open(result.project / "contrib" / "env-sample") as f:
