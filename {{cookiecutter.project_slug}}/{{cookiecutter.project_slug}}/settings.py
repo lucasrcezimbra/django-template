@@ -127,7 +127,10 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": config(
+            "STORAGE_STATIC_BACKEND",
+            default="whitenoise.storage.CompressedManifestStaticFilesStorage",
+        ),
     },
 }
 {%- endif %}
