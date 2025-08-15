@@ -77,6 +77,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                {%- if cookiecutter.use_sentry %}
+                "{{ cookiecutter.project_slug }}.core.context_processors.sentry_context",
+                {%- endif %}
             ],
         },
     },

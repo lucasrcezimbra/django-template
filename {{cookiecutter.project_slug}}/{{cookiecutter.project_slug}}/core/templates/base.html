@@ -11,6 +11,13 @@
         {{"{% load django_htmx %}"}}
         {{"{% htmx_script %}"}}
         {%- endif %}
+        {%- if cookiecutter.use_sentry %}
+        <script
+            src="https://browser.sentry-cdn.com/8.32.0/bundle.min.js"
+            integrity="sha384-dOOeMzjNyY5lFvDO6OPa6OLJLWBDc21zqfRxvl7VvAKpXiP5ZAYML3vSv2mY1Fp+"
+            crossorigin="anonymous"
+        ></script>
+        {%- endif %}
     </head>
     <body>
         <div id="content">
@@ -18,6 +25,18 @@
             {{"{% block content %}"}}{{"{% endblock %}"}}
 
         </div>
+        {%- if cookiecutter.use_sentry %}
+        <script>
+            const sentryDsn = "{{"{{ SENTRY_DSN|default_if_none:'' }}"}}";
+            if (sentryDsn) {
+                Sentry.init({
+                    dsn: sentryDsn,
+                    environment: "{{"{{ SENTRY_ENV|default:'production' }}"}}",
+                    tracesSampleRate: 1.0,
+                });
+            }
+        </script>
+        {%- endif %}
         {%- if cookiecutter.css == 'Bootstrap' %}
         <script src="{{"{% static 'bootstrap.min.js' %}"}}" defer></script>
         {%- endif %}
