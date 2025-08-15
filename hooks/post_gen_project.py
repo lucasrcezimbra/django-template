@@ -38,3 +38,6 @@ if __name__ == "__main__":
     if "{{cookiecutter.css}}" != "Bootstrap":
         remove("{{cookiecutter.project_slug}}/static/bootstrap.min.css")
         remove("{{cookiecutter.project_slug}}/static/bootstrap.min.js")
+
+    if "{{cookiecutter.use_sentry}}" == "False":
+        remove("{{cookiecutter.project_slug}}/core/context_processors.py")
