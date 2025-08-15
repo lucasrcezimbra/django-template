@@ -63,7 +63,6 @@ def test_false(cookies):
     with open(result.project / "pyproject.toml") as f:
         assert "whitenoise" not in f.read()
 
-    # Check that STORAGE_STATIC_BACKEND is not in environment files when staticfiles is disabled
     with open(result.project / ".env") as f:
         assert "STORAGE_STATIC_BACKEND" not in f.read()
 
