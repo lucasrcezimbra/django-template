@@ -5,11 +5,20 @@ import sentry_sdk
 {%- endif %}
 from decouple import Csv, config
 from dj_database_url import parse as dburl
+{% if cookiecutter.use_sentry -%}
+from sentry_sdk.integrations.django import DjangoIntegration
+{%- endif %}
 
 {% if cookiecutter.use_sentry -%}
 SENTRY_DSN = config("SENTRY_DSN", default=None)
 if SENTRY_DSN:
-    sentry_sdk.init(dsn=SENTRY_DSN, environment=config("ENV"))
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        environment=config("ENV"),
+        integrations=[
+            DjangoIntegration(cache_spans=True),
+        ],
+    )
 {% endif -%}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
