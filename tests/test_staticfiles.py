@@ -34,7 +34,6 @@ def test_default_true(cookies):
     with open(result.project / "pyproject.toml") as f:
         assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
 
-    # Check that the STORAGE_STATIC_BACKEND is in the environment files
     with open(result.project / ".env") as f:
         assert (
             "STORAGE_STATIC_BACKEND=django.contrib.staticfiles.storage.StaticFilesStorage"
