@@ -21,7 +21,10 @@ def test_default_true(cookies):
                     STATIC_URL = "/static/"
                     STORAGES = {
                         "staticfiles": {
-                            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+                            "BACKEND": config(
+                                "STORAGE_STATIC_BACKEND",
+                                default="whitenoise.storage.CompressedManifestStaticFilesStorage",
+                            ),
                         },
                     }"""
             )
@@ -30,6 +33,18 @@ def test_default_true(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
+
+    with open(result.project / ".env") as f:
+        assert (
+            "STORAGE_STATIC_BACKEND=django.contrib.staticfiles.storage.StaticFilesStorage"
+            in f.read()
+        )
+
+    with open(result.project / "contrib" / "env-sample") as f:
+        assert (
+            "STORAGE_STATIC_BACKEND=django.contrib.staticfiles.storage.StaticFilesStorage"
+            in f.read()
+        )
 
 
 def test_false(cookies):
@@ -47,3 +62,9 @@ def test_false(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         assert "whitenoise" not in f.read()
+
+    with open(result.project / ".env") as f:
+        assert "STORAGE_STATIC_BACKEND" not in f.read()
+
+    with open(result.project / "contrib" / "env-sample") as f:
+        assert "STORAGE_STATIC_BACKEND" not in f.read()
