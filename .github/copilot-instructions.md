@@ -96,6 +96,7 @@ project_name/
 - Use Ruff for linting Python code
 - Template files should maintain consistent indentation
 - Conditional blocks should be clearly commented
+- **Dependencies**: Keep dependencies in alphabetical order in pyproject.toml templates
 
 ## Common Patterns
 
