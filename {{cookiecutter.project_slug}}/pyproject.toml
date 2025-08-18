@@ -9,6 +9,7 @@ python = "^3.12"
 dj-database-url = "2.2.0"
 django = "5.0.6"
 django-extensions = "3.2.3"
+django-migration-linter = "5.1.0"
 {%- if cookiecutter.html == 'HTMX' %}
 django-htmx = "1.23.0"
 {%- endif %}
@@ -31,7 +32,6 @@ whitenoise = {extras = ["brotli"], version = "6.7.0"}
 {%- endif %}
 
 [tool.poetry.group.dev.dependencies]
-django-migration-linter = "5.1.0"
 model-bakery = "1.19.5"
 pre-commit = "3.8.0"
 pytest = "8.3.3"
