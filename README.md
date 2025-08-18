@@ -24,6 +24,7 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 ## Features
 - [dj-database-url](https://github.com/kennethreitz/dj-database-url) to cast database URL to Django setting
 - [django-extensions](https://github.com/django-extensions/django-extensions) for custom extensions for Django
+- [django-migration-linter](https://github.com/3YOURMIND/django-migration-linter) to detect backward incompatible migrations
 - [docker](https://www.docker.com/) with [compose](https://github.com/docker/compose)
 - [GitHub](https://github.com/) Actions for CI
 - [Gunicorn](https://gunicorn.org/) as WSGI HTTP Server
