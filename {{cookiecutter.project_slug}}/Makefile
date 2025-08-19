@@ -24,6 +24,7 @@ install:
 lint:
 	poetry run pre-commit run -a
 	poetry run python manage.py lintmigrations
+	poetry run pytest --dead-fixtures
 
 run:
 	poetry run gunicorn {{ cookiecutter.project_slug }}.wsgi:application
