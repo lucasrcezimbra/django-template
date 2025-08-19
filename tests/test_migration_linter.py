@@ -29,4 +29,3 @@ def test_makefile_includes_lintmigrations(cookies):
     with open(result.project / "Makefile") as f:
         content = f.read()
         assert "poetry run python manage.py lintmigrations" in content
-
