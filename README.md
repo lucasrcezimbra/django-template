@@ -37,6 +37,7 @@ cookiecutter https://github.com/lucasrcezimbra/django-template
 and [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
 - [pytest-django](https://github.com/pytest-dev/pytest-django),
 [pytest-mock](https://github.com/pytest-dev/pytest-mock),
+[pytest-deadfixtures](https://github.com/jllorencetti/pytest-deadfixtures),
 and [models_bakery](https://github.com/model-bakers/model_bakery) for tests
 - [python-decouple](https://github.com/henriquebastos/python-decouple) to organize settings and decouple from code
 
