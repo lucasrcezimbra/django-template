@@ -1,6 +1,3 @@
-DEFAULT_PROJECT = "api"
-
-
 def test_pytest_deadfixtures_included(cookies):
     result = cookies.bake()
 
