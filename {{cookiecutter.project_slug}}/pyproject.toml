@@ -12,6 +12,7 @@ django-extensions = "3.2.3"
 {%- if cookiecutter.html == 'HTMX' %}
 django-htmx = "1.23.0"
 {%- endif %}
+django-migration-linter = "5.1.0"
 {%- if cookiecutter.api != 'No' %}
 django-ninja = "1.2.0"
 {%- endif %}

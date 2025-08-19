@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     {%- endif %}
     "django_extensions",
+    "django_migration_linter",
     {%- if cookiecutter.html == "HTMX" %}
     "django_htmx",
     {%- endif %}

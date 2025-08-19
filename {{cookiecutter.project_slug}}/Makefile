@@ -23,6 +23,7 @@ install:
 
 lint:
 	poetry run pre-commit run -a
+	poetry run python manage.py lintmigrations
 
 run:
 	poetry run gunicorn {{ cookiecutter.project_slug }}.wsgi:application
