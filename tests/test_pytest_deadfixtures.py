@@ -2,7 +2,6 @@ DEFAULT_PROJECT = "api"
 
 
 def test_pytest_deadfixtures_included(cookies):
-    """Test that pytest-deadfixtures is included in dev dependencies."""
     result = cookies.bake()
 
     assert result.exit_code == 0
@@ -13,7 +12,6 @@ def test_pytest_deadfixtures_included(cookies):
 
 
 def test_makefile_includes_pytest_deadfixtures(cookies):
-    """Test that the lint command includes pytest --dead-fixtures."""
     result = cookies.bake()
 
     assert result.exit_code == 0
