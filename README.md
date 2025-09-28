@@ -12,12 +12,22 @@ allows you to update the project with the latest template changes using
 ```bash
 pip install cruft
 cruft create https://github.com/lucasrcezimbra/django-template
+cd <project_name>
+git init
+make install
+git add .
+git commit -m "Initial commit"
 ```
 
 ### Using Cookiecutter
 ```bash
 pip install -U cookiecutter
 cookiecutter https://github.com/lucasrcezimbra/django-template
+cd <project_name>
+git init
+make install
+git add .
+git commit -m "Initial commit"
 ```
 
 
