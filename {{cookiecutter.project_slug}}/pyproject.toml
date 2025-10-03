@@ -8,9 +8,9 @@ authors = []
 python = "^3.12"
 dj-database-url = "2.2.0"
 django = "5.2.7"
-django-extensions = "3.2.3"
+django-extensions = "4.1"
 {%- if cookiecutter.html == 'HTMX' %}
-django-htmx = "1.23.0"
+django-htmx = "1.26.0"
 {%- endif %}
 django-migration-linter = "5.1.0"
 {%- if cookiecutter.api != 'No' %}
@@ -25,7 +25,7 @@ psycopg = {extras = ["pool"], version = "3.2.9"}
 {%- endif %}
 python-decouple = "3.8"
 {%- if cookiecutter.use_sentry %}
-sentry-sdk = {extras = ["django"], version = "2.7.1"}
+sentry-sdk = {extras = ["django"], version = "2.39.0"}
 {%- endif %}
 {%- if cookiecutter.staticfiles %}
 whitenoise = {extras = ["brotli"], version = "6.7.0"}
@@ -34,7 +34,7 @@ whitenoise = {extras = ["brotli"], version = "6.7.0"}
 [tool.poetry.group.dev.dependencies]
 model-bakery = "1.19.5"
 pre-commit = "3.8.0"
-pytest = "8.3.3"
+pytest = "8.4.2"
 pytest-deadfixtures = "2.2.1"
 pytest-django = "4.9.0"
 pytest-mock = "3.14.0"
