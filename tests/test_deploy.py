@@ -89,7 +89,7 @@ def test_render(cookies):
                   - key: ALLOWED_HOSTS
                     value: api.onrender.com
                   - key: PYTHON_VERSION
-                    value: 3.11.6
+                    value: 3.13.5
                   - key: POETRY_VERSION
                     value: 1.6.1
                     """
