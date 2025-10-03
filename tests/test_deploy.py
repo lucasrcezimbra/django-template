@@ -91,6 +91,6 @@ def test_render(cookies):
                   - key: PYTHON_VERSION
                     value: 3.13.5
                   - key: POETRY_VERSION
-                    value: 1.6.1
+                    value: 2.1.3
                     """
         )
