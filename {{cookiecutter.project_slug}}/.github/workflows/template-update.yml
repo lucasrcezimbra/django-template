@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v6
       - run: pip install cruft
       - run: cruft update --skip-apply-ask
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
           commit-message: "chore: update template with cruft"
