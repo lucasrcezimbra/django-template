@@ -1,43 +1,45 @@
-[tool.poetry]
+[project]
 name = "{{ cookiecutter.project_slug }}"
 version = "0.0.0"
 description = ""
 authors = []
+requires-python = "~=3.13"
+dependencies = [
+  "dj-database-url==2.2.0",
+  "django==5.2.7",
+  "django-extensions==4.1",
+  {%- if cookiecutter.html == 'HTMX' %}
+  "django-htmx==1.26.0",
+  {%- endif %}
+  "django-migration-linter==5.1.0",
+  {%- if cookiecutter.api != 'No' %}
+  "django-ninja==1.2.0",
+  {%- endif %}
+  {%- if cookiecutter.api == 'Django Ninja CRUD' %}
+  "django-ninja-crud==0.2.0",
+  {%- endif %}
+  "gunicorn==23.0.0",
+  {%- if cookiecutter.database == 'PostgreSQL' %}
+  "psycopg[pool]==3.2.9",
+  {%- endif %}
+  "python-decouple==3.8",
+  {%- if cookiecutter.use_sentry %}
+  "sentry-sdk[django]==2.39.0",
+  {%- endif %}
+  {%- if cookiecutter.staticfiles %}
+  "whitenoise[brotli]==6.7.0",
+  {%- endif %}
+]
 
-[tool.poetry.dependencies]
-python = "^3.13"
-dj-database-url = "2.2.0"
-django = "5.2.7"
-django-extensions = "4.1"
-{%- if cookiecutter.html == 'HTMX' %}
-django-htmx = "1.26.0"
-{%- endif %}
-django-migration-linter = "5.1.0"
-{%- if cookiecutter.api != 'No' %}
-django-ninja = "1.2.0"
-{%- endif %}
-{%- if cookiecutter.api == 'Django Ninja CRUD' %}
-django-ninja-crud = "0.2.0"
-{%- endif %}
-gunicorn = "23.0.0"
-{%- if cookiecutter.database == 'PostgreSQL' %}
-psycopg = {extras = ["pool"], version = "3.2.9"}
-{%- endif %}
-python-decouple = "3.8"
-{%- if cookiecutter.use_sentry %}
-sentry-sdk = {extras = ["django"], version = "2.39.0"}
-{%- endif %}
-{%- if cookiecutter.staticfiles %}
-whitenoise = {extras = ["brotli"], version = "6.7.0"}
-{%- endif %}
-
-[tool.poetry.group.dev.dependencies]
-model-bakery = "1.19.5"
-pre-commit = "3.8.0"
-pytest = "8.4.2"
-pytest-deadfixtures = "2.2.1"
-pytest-django = "4.9.0"
-pytest-mock = "3.14.0"
+[project.optional-dependencies]
+dev = [
+  "model-bakery==1.19.5",
+  "pre-commit==3.8.0",
+  "pytest==8.4.2",
+  "pytest-deadfixtures==2.2.1",
+  "pytest-django==4.9.0",
+  "pytest-mock==3.14.0",
+]
 
 {% if cookiecutter.html != "No" %}
 [tool.djlint]
