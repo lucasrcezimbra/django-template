@@ -32,7 +32,7 @@ def test_default_true(cookies):
         )
 
     with open(result.project / "pyproject.toml") as f:
-        assert 'whitenoise = {extras = ["brotli"], version = "' in f.read()
+        assert "whitenoise[brotli]==" in f.read()
 
     with open(result.project / ".env") as f:
         assert (

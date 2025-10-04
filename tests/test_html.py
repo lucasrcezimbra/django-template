@@ -68,7 +68,7 @@ def test_htmx(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         content = f.read()
-        assert "django-htmx =" in content
+        assert "django-htmx==" in content
         assert "[tool.djlint]" in content
 
     with open(result.project / DEFAULT_PROJECT / "settings.py") as f:

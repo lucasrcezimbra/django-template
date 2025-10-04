@@ -18,7 +18,7 @@ def test_default_true(cookies):
         assert "SENTRY_DSN=" in f.read()
 
     with open(result.project / "pyproject.toml") as f:
-        assert 'sentry-sdk = {extras = ["django"], version = "' in f.read()
+        assert "sentry-sdk[django]==" in f.read()
 
 
 def test_false(cookies):

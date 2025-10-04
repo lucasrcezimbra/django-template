@@ -14,8 +14,7 @@ def test_default_postgres(cookies):
 
     with open(result.project / "pyproject.toml") as f:
         content = f.read()
-        assert "psycopg" in content
-        assert 'extras = ["pool"]' in content
+        assert "psycopg[pool]" in content
 
     with open(result.project / "README.md") as f:
         assert "docker compose up -d" in f.read()
