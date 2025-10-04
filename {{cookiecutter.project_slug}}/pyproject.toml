@@ -31,6 +31,10 @@ dependencies = [
   {%- endif %}
 ]
 
+
+[tool.poetry]
+package-mode = false
+
 [tool.poetry.group.dev.dependencies]
 model-bakery = "1.19.5"
 pre-commit = "3.8.0"
