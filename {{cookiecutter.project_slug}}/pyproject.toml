@@ -31,15 +31,13 @@ dependencies = [
   {%- endif %}
 ]
 
-[project.optional-dependencies]
-dev = [
-  "model-bakery==1.19.5",
-  "pre-commit==3.8.0",
-  "pytest==8.4.2",
-  "pytest-deadfixtures==2.2.1",
-  "pytest-django==4.9.0",
-  "pytest-mock==3.14.0",
-]
+[tool.poetry.group.dev.dependencies]
+model-bakery = "1.19.5"
+pre-commit = "3.8.0"
+pytest = "8.4.2"
+pytest-deadfixtures = "2.2.1"
+pytest-django = "4.9.0"
+pytest-mock = "3.14.0"
 
 {% if cookiecutter.html != "No" %}
 [tool.djlint]
