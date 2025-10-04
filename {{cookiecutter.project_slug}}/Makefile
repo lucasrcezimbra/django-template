@@ -7,14 +7,14 @@ build:
 	poetry run python manage.py migrate
 
 dev:
-	{%- if cookiecutter.database == 'PostgreSQL' %}
+	{% if cookiecutter.database == 'PostgreSQL' -%}
 	docker compose up -d
 	{% endif -%}
 	poetry run python manage.py migrate
 	poetry run python manage.py runserver
 
 install:
-	{%- if cookiecutter.database == 'PostgreSQL' %}
+	{% if cookiecutter.database == 'PostgreSQL' -%}
 	docker compose up -d
 	{% endif -%}
 	poetry install
@@ -23,7 +23,7 @@ install:
 
 lint:
 	poetry run pre-commit run -a
-	{%- if cookiecutter.database == 'PostgreSQL' %}
+	{% if cookiecutter.database == 'PostgreSQL' -%}
 	docker compose up -d
 	{% endif -%}
 	poetry run python manage.py lintmigrations
@@ -33,7 +33,7 @@ run:
 	poetry run gunicorn {{ cookiecutter.project_slug }}.wsgi:application
 
 test:
-	{%- if cookiecutter.database == 'PostgreSQL' %}
+	{% if cookiecutter.database == 'PostgreSQL' -%}
 	docker compose up -d
 	{% endif -%}
 	poetry run pytest
