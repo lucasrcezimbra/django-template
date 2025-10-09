@@ -1,5 +1,3 @@
-# Copilot Instructions for Django Template
-
 ## Project Overview
 
 This is a **Cookiecutter template** for generating opinionated Django projects. It's not a Django application itself, but rather a template that generates Django applications with various configurable features.
