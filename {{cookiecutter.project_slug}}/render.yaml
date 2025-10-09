@@ -1,21 +1,28 @@
+{% if cookiecutter.database == "PostgreSQL" -%}
 databases:
   - name: {{cookiecutter.project_slug}}
     databaseName: {{cookiecutter.project_slug}}
     user: {{cookiecutter.project_slug}}
     plan: free
 
+{% endif -%}
 services:
   - type: web
     name: {{cookiecutter.project_slug}}
-    plan: free
+    plan: {% if cookiecutter.database == "SQLite" -%}starter{% else %}free{% endif %}
     runtime: python
     buildCommand: "poetry install && poetry run python manage.py collectstatic && poetry run python manage.py migrate"
     startCommand: "poetry run gunicorn {{cookiecutter.project_slug}}.wsgi:application"
     envVars:
+      {% if cookiecutter.database == "PostgreSQL" -%}
       - key: DATABASE_URL
         fromDatabase:
           name: {{cookiecutter.project_slug}}
           property: connectionString
+      {%- elif cookiecutter.database == "SQLite" -%}
+      - key: DATABASE_URL
+        value: sqlite:////var/data/db.sqlite3
+      {%- endif %}
       - key: SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
@@ -26,3 +33,9 @@ services:
         value: 3.13.5
       - key: POETRY_VERSION
         value: 2.1.3
+    {%- if cookiecutter.database == "SQLite" %}
+    disk:
+      name: disk
+      mountPath: /var/data
+      sizeGB: 1
+    {%- endif %}

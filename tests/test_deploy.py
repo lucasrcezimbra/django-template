@@ -53,8 +53,8 @@ def test_heroku(cookies):
         )
 
 
-def test_render(cookies):
-    result = cookies.bake(extra_context={"deploy": "Render"})
+def test_render_with_postgres(cookies):
+    result = cookies.bake(extra_context={"deploy": "Render", "database": "PostgreSQL"})
     found_toplevel_files = {f.basename for f in result.project.listdir()}
 
     assert "Procfile" not in found_toplevel_files
@@ -93,4 +93,38 @@ def test_render(cookies):
                   - key: POETRY_VERSION
                     value: 2.1.3
                     """
+        )
+
+
+def test_render_with_sqlite(cookies):
+    result = cookies.bake(extra_context={"deploy": "Render", "database": "SQLite"})
+
+    with open(result.project / "render.yaml") as f:
+        assert f.read() == dedent(
+            """\
+            services:
+              - type: web
+                name: api
+                plan: starter
+                runtime: python
+                buildCommand: "poetry install && poetry run python manage.py collectstatic && poetry run python manage.py migrate"
+                startCommand: "poetry run gunicorn api.wsgi:application"
+                envVars:
+                  - key: DATABASE_URL
+                    value: sqlite:////var/data/db.sqlite3
+                  - key: SECRET_KEY
+                    generateValue: true
+                  - key: WEB_CONCURRENCY
+                    value: 4
+                  - key: ALLOWED_HOSTS
+                    value: api.onrender.com
+                  - key: PYTHON_VERSION
+                    value: 3.13.5
+                  - key: POETRY_VERSION
+                    value: 2.1.3
+                disk:
+                  name: disk
+                  mountPath: /var/data
+                  sizeGB: 1
+                  """
         )
