@@ -1,0 +1,49 @@
+name: Sync Dependencies
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - '.github/workflows/sync-dependencies.yml'
+
+jobs:
+  sync-dependencies:
+    name: Sync Template Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Sync Dependencies
+        run: |
+          # Extract dependencies from root pyproject.toml template group
+          python .github/scripts/sync_dependencies.py
+        
+      - name: Run Poetry Lock in template directory
+        run: |
+          cd {{cookiecutter.project_slug}}
+          poetry lock
+
+      - name: Commit and push changes if needed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if [[ $(git diff --name-only | grep -c "{{cookiecutter.project_slug}}/pyproject.toml\|{{cookiecutter.project_slug}}/poetry.lock") -gt 0 ]]; then
+            git add {{cookiecutter.project_slug}}/pyproject.toml {{cookiecutter.project_slug}}/poetry.lock
+            git commit -m "Sync template dependencies from root" -m "Automated by sync-dependencies workflow"
+            git push
+          else
+            echo "No changes to commit"
+          fi
