@@ -11,9 +11,7 @@ def test_default_true(cookies):
         content = f.read()
         assert "django.contrib.staticfiles" in content
         assert "whitenoise.middleware.WhiteNoiseMiddleware" in content
-        assert (
-            dedent(
-                """\
+        assert dedent("""\
                     STATICFILES_DIRS = [
                         BASE_DIR / "api" / "static",
                     ]
@@ -26,10 +24,7 @@ def test_default_true(cookies):
                                 default="whitenoise.storage.CompressedManifestStaticFilesStorage",
                             ),
                         },
-                    }"""
-            )
-            in content
-        )
+                    }""") in content
 
     with open(result.project / "pyproject.toml") as f:
         assert "whitenoise[brotli]==" in f.read()
