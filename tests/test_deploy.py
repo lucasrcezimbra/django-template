@@ -38,19 +38,14 @@ def test_heroku(cookies):
     assert "render.yaml" not in found_toplevel_files
     assert "Procfile" in found_toplevel_files
     with open(result.project / "README.md") as f:
-        assert (
-            dedent(
-                """\
+        assert dedent("""\
                     ## Deploy
                     ```bash
                     heroku create api
                     heroku addons:create heroku-postgresql:hobby-dev
                     heroku config:set DEBUG=True SECRET_KEY=`python contrib/secret_gen.py` ALLOWED_HOSTS="*"
                     git push heroku master
-                    ```"""
-            )
-            in f.read()
-        )
+                    ```""") in f.read()
 
 
 def test_render_with_postgres(cookies):
@@ -62,8 +57,7 @@ def test_render_with_postgres(cookies):
     assert ".dockerignore" not in found_toplevel_files
     assert "render.yaml" in found_toplevel_files
     with open(result.project / "render.yaml") as f:
-        assert f.read() == dedent(
-            """\
+        assert f.read() == dedent("""\
             databases:
               - name: api
                 databaseName: api
@@ -92,16 +86,14 @@ def test_render_with_postgres(cookies):
                     value: 3.13.5
                   - key: POETRY_VERSION
                     value: 2.1.3
-                    """
-        )
+                    """)
 
 
 def test_render_with_sqlite(cookies):
     result = cookies.bake(extra_context={"deploy": "Render", "database": "SQLite"})
 
     with open(result.project / "render.yaml") as f:
-        assert f.read() == dedent(
-            """\
+        assert f.read() == dedent("""\
             services:
               - type: web
                 name: api
@@ -126,5 +118,4 @@ def test_render_with_sqlite(cookies):
                   name: disk
                   mountPath: /var/data
                   sizeGB: 1
-                  """
-        )
+                  """)
